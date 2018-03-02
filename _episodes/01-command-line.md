@@ -19,7 +19,7 @@ keypoints:
 ---
 
 If GAP is installed correctly you should be able to start it. Exactly how 
-you start GAP will depending on your operating system and how you installed
+you start GAP will depend on your operating system and how you installed
 GAP. GAP starts with the banner displaying information about the version of
 the system and loaded components, and then displays the command line prompt
 `gap>`, for example:
@@ -44,14 +44,7 @@ gap>
 
 To leave GAP, type `quit;` at the GAP prompt. Remember that all GAP commands,
 including this one, must be finished with a semicolon! Practice entering
-`quit;` to leave GAP, and then starting a new GAP session. Before continuing, you
-may wish to enter the following command to display GAP prompts and user inputs
-in different colours:
-
-~~~
- ColorPrompt(true);
-~~~
-{: .source}
+`quit;` to leave GAP, and then starting a new GAP session.
 
 The easiest way to start trying GAP out is as a calculator:
 
@@ -106,26 +99,26 @@ Up and Down arrow keys after that, to scroll only the lines that begin with
 the same string.
 
 If you want to store a value for later use, you can assign it to a name
-using `:=` 
+using ` := ` 
 
 ~~~
-universe := 6*7;
+universe  :=  6*7;
 ~~~
 {: .source}
 
-> ## `:=`, `=` and `<>`
+> ## ` := `, `=` and `<>`
 >
-> * In other languages you might be more familiar with using `=`, to assign
->   variables, but GAP uses `:=`.
+> * In other languages you might be more familiar with using `=` to assign
+>   variables, but GAP uses ` := `.
 >
-> * GAP uses `=` to compare if two things are the same (where other languages might
->   use '=='.
+> * GAP uses `=` to compare if two things are the same where other languages might
+>   use `==`.
 >
 > * Finally, GAP uses `<>` to check if two things are not equal, rather than the `!=`
 >   you might have seen before.
 {: .callout}
 
-Whitespace characters (i.e. Spaces, Tabs and Returns) are insignificant in GAP,
+Whitespace characters (i.e. spaces, tabs and returns) are insignificant in GAP,
 except if they occur inside a string. For example, the previous input
 could be typed without spaces:
 
@@ -143,7 +136,7 @@ Whitespace symbols are often used to format more complicated commands for
 better readability. For example, the following input which creates a 3x3 matrix
 
 ~~~
-m:=[[1,2,3],[4,5,6],[7,8,9]];
+m := [[1,2,3],[4,5,6],[7,8,9]];
 ~~~
 {: .source}
 
@@ -157,7 +150,7 @@ We can instead write our matrix over 3 lines. In this case, instead of the full 
 the input with a semicolon:
 
 ~~~
-gap> m:=[[ 1, 2, 3 ],
+gap> m := [[ 1, 2, 3 ],
 >        [ 4, 5, 6 ],
 >        [ 7, 8, 9 ]];
 ~~~
@@ -234,7 +227,7 @@ Functions may be combined in various ways, and may be
 used as arguments of other functions, as we will see later.
 They can be defined very compactly using the arrow notation:
 ~~~
-f:=x->2*x+18;;
+f := x->2*x+18;;
 f(3);
 ~~~
 {: .source}
@@ -244,6 +237,7 @@ f(3);
 ~~~
 {: .output}
 
+Note that the `;;` suppresses the output of an expression.
 
 A very time-saving feature of the GAP command-line interfaces is completion
 of identifiers when the Tab key is pressed. For example, type `Fib` and then
@@ -270,7 +264,7 @@ first letter of each word is capitalized (remember that GAP is case-sensitive!).
 Further details on naming conventions used in GAP are documented in the GAP
 manual [here](http://www.gap-system.org/Manuals/doc/ref/chap5.html#X81F732457F7BC851).
 Functions with names which are `ALL_CAPITAL_LETTERS` are internal functions not intended
-for general use. Use them with extreme care!
+for general use. Use them only if you know exactly what you are doing!
 
 It is important to remember that GAP is case-sensitive. For example, the following
 input causes an error
@@ -324,10 +318,10 @@ Enter `?Group`, and you will see all help entries, starting with `Group`:
 {: .output}
 
 You may use arrow keys to move up and down the list, and open help pages by
-pressing Return key. For this exercise, open `Tutorial: Groups and Homomorphisms`
+pressing the Return key. For this exercise, open `Tutorial: Groups and Homomorphisms`
 first. Note navigation instructions at the bottom of the screen. Look at
 first two pages, then press `q` to return to the selection menu. Next, navigate to
-`Reference: Groups` and open it. Within two first pages you will find the
+`Reference: Groups` and open it. Within the two first pages you will find the
 function `Group` and mentioning of `Order`.
 
 
@@ -340,18 +334,17 @@ If you are viewing the GAP documentation in a terminal, you might find it helpfu
 open two copies of GAP, one for reading documentation and one for writing code!
 
 This guide shows how permutations in GAP are written in cycle notation, and also
-shows common functions which are used with groups. Also, in some places two semi-colons
-are used at the end of a line. This stops GAP from showing the result of a computation.
+shows common functions which are used with groups.
 
 ~~~
-a:=(1,2,3);;b:=(2,3,4);;
+a := (1,2,3);;b := (2,3,4);;
 ~~~
 {: .source}
 
 Next, let `G` be a group generated by `a` and `b`:
 
 ~~~
-G:=Group(a,b);
+G := Group(a,b);
 ~~~
 {: .source}
 
@@ -399,7 +392,7 @@ it and call again. But instead, we will use `last` which is a special variable
 holding the last result returned by GAP:
 
 ~~~
-elts:=last;
+elts := last;
 ~~~
 {: .source}
 
@@ -427,9 +420,9 @@ gap> elts[1]; elts[3]; Length(elts);
 We can access elements of lists and we can also dynamically change the length of a list by adding new elements:
 
 ~~~
-L:=[3,4];;
+L := [3,4];;
 L;
-L[1]:=2;;
+L[1] := 2;;
 L;
 Add(L, 3];;
 L;
@@ -503,9 +496,9 @@ od;
 For example, to find the average order of our group `G` we can do.
 
 ~~~
-s:=0;;
+s := 0;;
 for g in elts do
-  s := s + Order(g);
+  s  :=  s + Order(g);
 od;
 s/Length(elts);
 ~~~
@@ -521,9 +514,9 @@ will let you loop over most types of object. We have to switch to using `Size`
 instead of `Length`, as groups don't have a length!
 
 ~~~
-s:=0;;
+s := 0;;
 for g in G do
-  s := s + Order(g);
+  s  :=  s + Order(g);
 od;
 s/Size(G);
 ~~~
@@ -538,9 +531,9 @@ There are other ways of looping, for example we can instead loop over the intege
 and accept `elts` like an array:
 
 ~~~
-s:=0;;
+s := 0;;
 for i in [ 1 .. Length(elts) ] do
-  s := s + Order( elts[i] );
+  s  :=  s + Order( elts[i] );
 od;
 s/Length(elts);
 ~~~
@@ -558,7 +551,7 @@ can be the argument of a function.
 `List(L,F)` makes a new list where the function `F` is applied to each
    member of the list `L`.
 ~~~
-f:=x->2*x+18;;
+f := x->2*x+18;;
 List([1..5], f); 
 ~~~
 {: .source}
