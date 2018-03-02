@@ -33,7 +33,42 @@ exactly like a GAP session. Thus, it is easy to create a test file simply by cop
 pasting the GAP session with all GAP prompts, inputs and outputs into a
 text file. Another way of creating a test file is by using the `LogTo` command to record a GAP session.
 During the test GAP will run all inputs from the test, compare the outputs with those in the test
-file and report any differences.
+file and report any differences. Let us first have a look at the `LogTo()` function before concerning ourselves with testing the code.
+
+If you want to record what you did in a GAP session to have a look at it later, you can enable logging with the `LogTo` function:
+
+~~~
+LogTo("gap-intro.log");
+~~~
+{: .source}
+
+This will create a file file `gap-intro.log` in the current directory which
+will contain all subsequent input and output that appears on your terminal.
+To stop logging, you can call `LogTo` without arguments:
+~~~
+gap> LogTo();
+~~~
+{: .source}
+
+or leave GAP. Note that `LogTo` blanks the file before starting, if it
+already exists!
+
+It can be useful to leave some comments in the log file in case you return to it in the future.
+You can enter the following after the GAP prompt:
+
+~~~
+# GAP Software Carpentry Lesson
+~~~
+{: .source}
+
+then after pressing the Return key, GAP will display a new prompt and the comment
+will be written to the log file.
+
+The log file records all interaction with GAP happening after the call of `LogTo` but nothing that happened
+before the function call.
+
+Now we know two ways of creating testing files: Copying the relevant lines out of your shell into a document or 
+saving the session with `LogTo`. Let us have a closer look at testing files.
 
 GAP test files are just text files but it is common practice to name them with the extension `.tst`. Now create the file `avgord.tst` (for simplicity in the current directory) with the following content:
 
