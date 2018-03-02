@@ -98,15 +98,13 @@ gap> G:=TrivialGroup();; # suppress output
 gap> AvgOrdOfGroup(G);
 1
 
-# finite matrix group over integers
-
 # matrix group over a finite field
 gap> AvgOrdOfGroup(SL(2,5));
 221/40
 ~~~
 {: .source}
 
-Let us test the extended version of the test again and check that it works:
+Let us check the extended version of the test again and see if it works:
 
 ~~~
 Test("avgord.tst");
@@ -128,7 +126,6 @@ gap> AvgOrdOfGroup(coll);
 11/4
 gap> IsInt(last);
 false
-
 ~~~
 
 We now want to work on a better implementation of `AvgOrdOfGroup` using the group structure of 
@@ -215,5 +212,5 @@ true
 ~~~
 {: .output}
 
-Thus, the approach "Make it right, then make it fast" helps to detect a bug
-immediately after it has been introduced.
+Thus, the approach "Make it right, then make it fast" helps to detect bugs
+immediately after they have been introduced.
