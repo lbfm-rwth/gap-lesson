@@ -41,20 +41,13 @@ On this path, the learner will became familiar with:
 {: .prereq}
 
 > ## Getting ready
-> 1. In your home directory, create a new directory called `avgord`.
-> 2. Start GAP:
+> 1.  Create a new directory called `avgord` in a suitable place.
+> 2. Change into your new directory.
+> 3. Start GAP:
 > * on Linux and OS X, call `path-to-your-gap-installation/gap4r8/bin/gap.sh`
 >    (edit the path as necessary);
 > * on Windows, call it via the appropriate menu or
 >    by double-clicking on the `gap4r8/bin/gap.bat` file in your GAP installation.
-> 3. Set your current directory to `avgord` calling `ChangeDirectoryCurrent` from
->    the IO package (if GAP is installed correctly, by default it should be loaded
->    when GAP starts):
-> * on Linux and OS X, call `ChangeDirectoryCurrent("/home/username/avgord");`
->    (edit the path as necessary; remember to type the full path to your home
->    directory instead of `~`).
-> * on Windows, call `ChangeDirectoryCurrent("C:/Users/username/avgord");`
->    (edit the path as necessary; remember to use `/` instead of `\`).
 > 4. Verify that your current directory is set up properly: call `DirectoryCurrent();`
 >    on Windows or `Exec("pwd");` on Linux and OS X and check that the path in the
 >    output points to the `avgord` directory.
