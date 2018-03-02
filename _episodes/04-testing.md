@@ -127,6 +127,7 @@ gap> AvgOrdOfGroup(coll);
 gap> IsInt(last);
 false
 ~~~
+{: .source}
 
 We now want to work on a better implementation of `AvgOrdOfGroup` using the group structure of 
 the argument thus improving the runtime of our algorithm. For this purpose, we rename our original function
