@@ -36,14 +36,13 @@ impact their correctness or worsen their performance.
 To start with, we need to create a **test file**. The test file looks
 exactly like the GAP session, so it is easy to create it by copying and
 pasting the GAP session with all GAP prompts, inputs and outputs into a
-text file (a test file could be also created from the log file with a
+text file (a test file could also be created from the log file with a
 GAP session recorded with the help of `LogTo`). During the test, GAP will
 run all inputs from the test, compare the outputs with those in the test
 file and will report any differences.
 
 GAP test files are just text files, but the common practice is to name
-them with the extension `.tst`. Now create in the current directory (to
-avoid typing the full path), the file `avgord.tst` with the following content:
+them with the extension `.tst`. Now create the file `avgord.tst` (for simplicity in the current directory) with the following content:
 
 ~~~
 # tests for average order of a group element
@@ -58,10 +57,10 @@ gap> AvgOrdOfGroup(S);
 
 As you see, the test file may include comments, with certain rules specifying
 where they may be placed, because one should be able to distinguish comments
-in the test file from GAP output started with `#`. For that purpose,
-lines at the beginning of the test file that start with `#`, and one empty line
+in the test file from GAP output started with `#`. For that purpose
+lines at the beginning of the test file that start with `#` and one empty line
 together with one or more lines starting with `#` are considered as comments.
-All other lines are considered as GAP output from the preceding GAP input.
+All other lines are considered GAP output from the preceding GAP input.
 
 To run the test, one should use the function `Test`, as documented [here](http://www.gap-system.org/Manuals/doc/ref/chap7.html#X87712F9D8732193C).
 For example (assuming that the function `AvgOrdOfGroup` is already loaded):
@@ -76,16 +75,16 @@ true
 ~~~
 {: .output}
 
-In this case, `Test` reported no discrepancies and returned `true`, so we
+In this case `Test` reported no discrepancies and returned `true`, so we
 conclude that the test has passed.
 
-We will not cover a topic of writing a good and comprehensive test suite here,
-and also will not cover various options of the `Test` function, permitting, for
-example, to ignore differences in the output formatting, or to display progress
-of the test, as these are described in its documentation.
+We will neither cover the topic of writting a good and comprehensive test suite
+nor discuss options provided by the `Test` function. For instance, it is possible
+to ignore differences in the output formatting as well as displaying the progress of the test.
+See the `Test` documentary to learn more about the features of the this function.
 
-Instead, we will now add more groups to `avgord.tst`, to demonstrate that the
-code also works with other kinds of groups, and to show various ways of
+Instead, we will now add more groups to `avgord.tst` to demonstrate that the
+code also works with other kinds of groups and to show various ways of
 combining commands in the test file:
 
 ~~~
