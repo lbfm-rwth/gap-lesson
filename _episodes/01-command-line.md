@@ -9,7 +9,6 @@ objectives:
 - "Using GAP help system"
 - "Basic objects and constructions in the GAP language"
 keypoints:
-- "Remember that GAP is case-sensitive!"
 - "Do not panic seeing 'Error, Variable: 'FuncName' must have a value'."
 - "Care about names of variables and functions."
 - "Use command line editing."
@@ -456,10 +455,18 @@ gap> elts[1]; elts[3]; Length(elts);
 
 Note that a list in GAP is not necessarily dense, i.e. it may contain holes:
 ~~~
-L:=[3,,4]
+[3,,4]
 ~~~
 {: .source}
-defines a list L of length 3!
+This is a list of length 3!.
+
+Another difference to other languages you might know is that the elements of a list
+are not necessarily of the same type:
+
+~~~
+[3, [1,2,3], (4,5)(2,3)]
+~~~
+{: .source}
 
 > ## Lists are more than arrays
 >
