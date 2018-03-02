@@ -453,12 +453,31 @@ gap> elts[1]; elts[3]; Length(elts);
 ~~~
 {: .output}
 
+We can access elements of lists and we can also dynamically change the length of a list by adding new elements:
+
+~~~
+L:=[3,4];;
+L;
+L[1]:=2;;
+L;
+Add(L, 3];;
+L;
+~~~
+{ : .source}
+~~~
+[3,4]
+[2,4]
+[2,4,3]
+~~~
+{: .output}
+
+
 Note that a list in GAP is not necessarily dense, i.e. it may contain holes:
 ~~~
 [3,,4]
 ~~~
 {: .source}
-This is a list of length 3!.
+This is a list of length 3!
 
 Another difference to other languages you might know is that the elements of a list
 are not necessarily of the same type:
@@ -467,6 +486,7 @@ are not necessarily of the same type:
 [3, [1,2,3], (4,5)(2,3)]
 ~~~
 {: .source}
+
 
 > ## Lists are more than arrays
 >
