@@ -58,8 +58,6 @@ The easiest way to start trying GAP out is as a calculator:
 ~~~
 {: .output}
 
-TODO: How to comments in GAP
-
 We can repeat our calculation from above
 if we want to record it as well. Instead of retyping it, we will use Up and Down
 arrow keys to scroll the *command line history*. Repeat this until you will see
