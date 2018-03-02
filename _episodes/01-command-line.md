@@ -686,7 +686,7 @@ false
 ~~~
 {: .output}
 
->## List operations
+> ## List operations
 > Use list operations to solve the following:
 > * Select from `elts` the stabiliser of the point 2.
 > * Select from `elts` the centraliser of the permutation (1,2)
