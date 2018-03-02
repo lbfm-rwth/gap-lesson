@@ -369,7 +369,12 @@ false
 {: .output}
 
 Our next task is to find out how to obtain a list of element and their orders.
-Enter `?elements` and explore the list of help topics. After its inspection,
+~~~
+Enter `?elements` and explore the list of help topics.
+~~~
+{: .challenge}
+
+After its inspection,
 the entry from the Tutorial does not seem relevant, but the entry from the
 Reference manual is. It also tells the difference between using `AsSSortedList`
 and `AsList`. So, this is the list of elements of `G`:
