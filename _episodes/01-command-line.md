@@ -454,6 +454,13 @@ gap> elts[1]; elts[3]; Length(elts);
 ~~~
 {: .output}
 
+Note that a list in GAP is not necessarily dense, i.e. it may contain holes:
+~~~
+L:=[3,,4]
+~~~
+{: output}
+defines a list L of length 3!
+
 > ## Lists are more than arrays
 >
 > * May contain holes or be empty
