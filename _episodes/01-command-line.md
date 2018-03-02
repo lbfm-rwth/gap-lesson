@@ -360,22 +360,9 @@ first two pages, then press `q` to return to the selection menu. Next, navigate 
 `Reference: Groups` and open it. Within two first pages you will find the
 function `Group` and mentioning of `Order`.
 
-GAP manual comes in several formats: text is good to view in a terminal,
-PDF is good for printing and HTML (especially with MathJax support) is
-very efficient for exploring with a browser. If you are running GAP on your
-own computer, you can set the help viewer to the default browser. If you are
-running GAP on a remote machine, this (probably) will not work. (see
-`?WriteGapIniFile` on how to make this setting permanent):
-
-~~~
-SetHelpViewer("browser");
-~~~
-{: .source}
-
-After that, invoke the help again, and see the difference!
 
 Let's now copy the following input from the first example of the GAP Reference
-manual Chapter on groups. It shows how to create permutations, and assign values
+Manual chapter on groups. It shows how to create permutations and assign values
 to variables. This is `Reference: Groups`. You can select it by writing `?11`, where
 you replace `11` with whatever number appears before `Reference: Groups` on your machine.
 
