@@ -65,34 +65,9 @@ The easiest way to start trying GAP out is as a calculator:
 ~~~
 {: .output}
 
-If you want to record what you did in a GAP session, so you can look over it later, you can enable logging with the `LogTo` function, like this.
+TODO: How to comments in GAP
 
-~~~
-LogTo("gap-intro.log");
-~~~
-{: .source}
-
-This will create a file file `gap-intro.log` in the current directory which
-will contain all subsequent input and output that appears on your terminal.
-To stop logging, you can call `LogTo` without arguments, as in `LogTo();`,
-or leave GAP. Note that `LogTo` blanks the file before starting, if it
-already exists!
-
-It can be useful to leave some comments in the log file in case you will
-return to it in the future. A comment in GAP starts with the symbol `#` and
-continues to the end of the line. You can enter the following after the
-GAP prompt:
-
-~~~
-# GAP Software Carpentry Lesson
-~~~
-{: .source}
-
-then after pressing the Return key, GAP will display new prompt but the comment
-will be written to the log file.
-
-The log file records all interaction with GAP that is happening after the call
-to `LogTo`, but not before. We can repeat our calculation from above
+We can repeat our calculation from above
 if we want to record it as well. Instead of retyping it, we will use Up and Down
 arrow keys to scroll the *command line history*. Repeat this until you will see
 the formula again, then press Return (the location of the cursor in the command
@@ -207,13 +182,13 @@ Display(m);
 ~~~
 {: .output}
 
-In general GAP functions like `LogTo` and `Display` are called using brackets,
+In general GAP functions like `Display` are called using brackets
 which contain a (possibly empty) list of arguments.
 
 > ## Functions are also GAP objects
 >
 > Check what happens if you forget to add brackets,
-> e.g. type `LogTo;` and `Factorial;`
+> e.g. type `Display;` and `Factorial;`
 > We will explain the differences in these outputs later.
 {: .callout}
 
