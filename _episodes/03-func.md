@@ -162,6 +162,8 @@ Using a text editor (for example, the one that you have used for the previous
 Software Carpentry lessons), create a text file called `avgord.g` containing
 the code of the function and comments (a good practice to use them!):
 
+TODO: explain comments
+
 ~~~
 #####################################################################
 #
@@ -229,21 +231,14 @@ AvgOrdOfGroup(M11);
 ~~~
 {: .output}
 
-> ## Which function is faster?
->
-> Try to repeatedly calculate `AvgOrdOfGroup(M11)` and `AvgOrdOfCollection(M11)`
-> and compare runtimes. Do this for new copy of `M11` and for the one for which
-> this parameter has already been observed. What do you observe?
-{: .callout}
-
-In the example of using `Read`, new GAP session was started to make it clear
+In the example of using `Read`, a new GAP session was started to make it clear
 that `AvgOrdOfGroup` did not exist before the call of `Read` and was loaded
 from the file. However, a file with a function like this could be read multiple
 times in the same GAP session (later you will see cases when re-reading a
 file is more complicated). Calling `Read` again executes all code in the file
 being read. This means that if the code of the function has been modified, and
 it has no errors (but possibly has warnings), the function will be
-overwritten. **Never ignore the warnings!**
+overwritten.
 
 For example, let us edit the file and replace the line
 
@@ -347,11 +342,16 @@ return sum/Size(G);
 ~~~
 {: .error}
 
+The reason GAP prints these warnings is the following.
+GAP distinguishes between so-called global and local variables.
+TODO: explain this, give an example
+
+TODO: explain, that one should **always** declare local variables as local variables
 These warnings mean because `g` and `sum` are not declared as `local`
 variables, GAP will expect them to be global variables at the time when
-the function will be called. Because they did not exist when `Read`
-was called, a warning was displayed. However, if they would be existing
-by that time, there would be no warning, and they may be still overwritten
+the function is called.
+Since they did not exist when `Read` was called, a warning was displayed.
+However, had they existed at that time, there would be no warning, and they may be still overwritten
 during the call to `AvgOrdOfGroup`! This shows how important is to
 declare local variables. Let us investigate what happened in slightly
 more details:
@@ -393,6 +393,7 @@ brk>
 {: .error}
 
 from which you can exit by entering `quit;`.
+TODO: expand on the break loop! show that you can access local variables. This is nothing short of an **interactive debugger**!
 
 What happens next demonstrates how things may go wrong:
 
