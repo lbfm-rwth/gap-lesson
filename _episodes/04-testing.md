@@ -20,17 +20,15 @@ The code of `AvgOrdOfGroup` is very simple and we expect it to be correct. It av
 running out of memory as it iterates over the group instead of creating a list of its elements
 (calling `AsList(SymmetricGroup(11))` already results in exceeding the permitted
 memory). However, it takes several minutes to calculate the average order of an
-element of `SymmetricGroup(11)` and thus needs improvement. This chapter is concerned with the first
-improvement of `AvgOrdOfGroup` using some facts from Group Theory and particularly with testing the function
-as we change it.
+element of `SymmetricGroup(11)` and thus needs improvement. This chapter deals with improving `AvgOrdOfGroup`
+using some facts from Group Theory and particularly with designing automated tests to check the correctness
+of these changes.
 
-At this point we should think about putting `avgorg.g` under version control to be able to revert changes if need be instead
+At this point we should think about putting `avgorg.g` under version control to be able to revert changes if needed instead
 of creating a new function to keep the old one around. Additionally, we should start testing our function
-methodically as we move along. This can be done efficiently by using **regression testing**:
-this is the term for testing based on rerunning previously completed tests to check that new changes do not
-impact their correctness or worsen their performance.
+methodically as we move along. This can be done efficiently by using **regression testing**, i.e. testing based on rerunning previously completed tests to check that new changes do not impact their correctness or worsen their performance.
 
-To start with we need to create a **test file**. The test file looks
+First we need to create a **test file**. The test file looks
 exactly like a GAP session. Thus, it is easy to create a test file simply by copying and
 pasting the GAP session with all GAP prompts, inputs and outputs into a
 text file. Another way of creating a test file is by using the `LogTo` command to record a GAP session.
@@ -50,17 +48,15 @@ gap> AvgOrdOfGroup(S);
 ~~~
 {: .source}
 
-As you see, the test file may include comments, with certain rules specifying
+As you see, the test file may include comments with certain rules specifying
 where they may be placed, because one should be able to distinguish comments
 in the test file from GAP output started with `#`. For that purpose
-lines at the beginning of the test file that start with `#` and one empty line
-together with one or more lines starting with `#` are considered as comments.
+lines at the beginning of the test file starting with `#` and one empty line
+together with one or more lines starting with `#` are considered to be comments.
 All other lines are considered GAP output from the preceding GAP input. Please be careful:
 By default, the `Test` function considers blank spaces and additional empty lines as a difference in the output. 
-TODO: Bsp mit Whitespaces und FAIL
 
-
-To run the test, one should use the function `Test`, as documented [here](http://www.gap-system.org/Manuals/doc/ref/chap7.html#X87712F9D8732193C).
+To run the test one should use the function `Test`, as documented [here](http://www.gap-system.org/Manuals/doc/ref/chap7.html#X87712F9D8732193C).
 For example (assuming that the function `AvgOrdOfGroup` is already loaded):
 
 ~~~
@@ -73,13 +69,12 @@ true
 ~~~
 {: .output}
 
-In this case `Test` reported no discrepancies and returned `true`, so we
-conclude that the test has passed.
+In this case `Test` reported no discrepancies and returned `true`, indicating that `AvgOrdOfGroup` has passed the test.
 
-We will neither cover the topic of writting a good and comprehensive test suite
+We will neither cover the topic of writing a good and comprehensive test suite
 nor discuss options provided by the `Test` function. For instance, it is possible
 to ignore differences in the output formatting as well as displaying the progress of the test.
-See the `Test` documentary to learn more about the features of the this function.
+See the `Test` documentary to learn more about the features of this function.
 
 Instead, we will now add more groups to `avgord.tst` to demonstrate that the
 code also works with other kinds of groups and to show various ways of
@@ -123,8 +118,8 @@ true
 ~~~
 {: .output}
 
-We have not used the underlying group sructure in our `AvgOrdOfGroup` function. It works just as fine 
-on a set of permutation not forming a group as the following example shows:
+We have not used the underlying group sructure in our `AvgOrdOfGroup` function yet. It works just as fine 
+on a set of permutations not forming a group as the following example shows:
 
 ~~~
 gap> coll := [(1,2,3),(2,3,4),(8,9,3),(1,2)];
@@ -137,8 +132,8 @@ false
 ~~~
 
 We now want to work on a better implementation of `AvgOrdOfGroup` using the group structure of 
-the argument. For this purpose, we rename our original function to `AvgOrdOfCollection` and define 
-a new `AvgOrdOfGroup` function. Using the fact that the order of an element is invariant
+the argument thus improving the runtime of our algorithm. For this purpose, we rename our original function
+to `AvgOrdOfCollection` and define a new `AvgOrdOfGroup` function. Using the fact that the order of an element is invariant
 under conjugation we compute the conjugacy classes of elements and one representative of each class.
 This yields the following improved version of `AvgOrdOfGroup` that should be added into `avgord.g`.
 
@@ -155,7 +150,7 @@ end;
 ~~~
 {: .source}
 
-but when we run the test, here comes a surprise!
+But when we run the test, here comes a surprise!
 
 ~~~
 Read("avgord.g");
@@ -220,5 +215,5 @@ true
 ~~~
 {: .output}
 
-Thus, the approach "Make it right, then make it fast" helped to detect a bug
+Thus, the approach "Make it right, then make it fast" helps to detect a bug
 immediately after it has been introduced.
