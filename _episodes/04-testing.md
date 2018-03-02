@@ -16,33 +16,28 @@ keypoints:
 - "Make it right, then make it fast!"
 ---
 
-The code of `AvgOrdOfGroup` is very simple and possibly nothing could go wrong
-with it. It avoids problems with running out of memory because of iterating
-over the group instead of creating a list of its elements
+The code of `AvgOrdOfGroup` is very simple and we expect it to be correct. It avoids problems with
+running out of memory as it iterates over the group instead of creating a list of its elements
 (calling `AsList(SymmetricGroup(11))` already results in exceeding the permitted
-memory), however it takes several minutes to calculate an average order of an
-element of `SymmetricGroup(11)`. But at least we are confident that it is
-correct.
+memory). However, it takes several minutes to calculate the average order of an
+element of `SymmetricGroup(11)` and thus needs improvement. This chapter is concerned with the first
+improvement of `AvgOrdOfGroup` using some facts from Group Theory and particularly with testing the function
+as we change it.
 
-Now we would like to write a better version of this function using some
-theoretical facts we know from the Group Theory. We may put
-`avgorg.g` under version control to revert changes if need be;
-we may create a new function to keep the old one around and compare the
-results of both; but this could be made even more efficient if we will
-use **regression testing**: this is the term for the testing based on
-rerunning previously completed tests to check that new changes do not
+At this point we should think about putting `avgorg.g` under version control to be able to revert changes if need be instead
+of creating a new function to keep the old one around. Additionally, we should start testing our function
+methodically as we move along. This can be done efficiently by using **regression testing**:
+this is the term for testing based on rerunning previously completed tests to check that new changes do not
 impact their correctness or worsen their performance.
 
-To start with, we need to create a **test file**. The test file looks
-exactly like the GAP session, so it is easy to create it by copying and
+To start with we need to create a **test file**. The test file looks
+exactly like a GAP session. Thus, it is easy to create a test file simply by copying and
 pasting the GAP session with all GAP prompts, inputs and outputs into a
-text file (a test file could also be created from the log file with a
-GAP session recorded with the help of `LogTo`). During the test, GAP will
-run all inputs from the test, compare the outputs with those in the test
+text file. Another way of creating a test file is by using the `LogTo` command to record a GAP session.
+During the test GAP will run all inputs from the test, compare the outputs with those in the test
 file and report any differences.
 
-GAP test files are just text files but the common practice is to name
-them with the extension `.tst`. Now create the file `avgord.tst` (for simplicity in the current directory) with the following content:
+GAP test files are just text files but it is common practice to name them with the extension `.tst`. Now create the file `avgord.tst` (for simplicity in the current directory) with the following content:
 
 ~~~
 # tests for average order of a group element
