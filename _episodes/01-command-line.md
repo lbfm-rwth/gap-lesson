@@ -14,7 +14,6 @@ keypoints:
 - "Use command line editing."
 - "Use autocompletion instead of typing names of functions and variables in full."
 - "Use `?` and `??` to view help pages."
-- "Set default help format to HTML using `SetHelpViewer`."
 - "Use `LogTo` function to save all GAP input and output into a text file."
 - "If calculation takes too long, press <Control>-C to interrupt it."
 - "Read 'A First Session with GAP' from the GAP Tutorial."
@@ -258,18 +257,16 @@ Factors(2^64-1);
 {: .output}
 
 Functions may be combined in various ways, and may be
-used as arguments of other functions, for example, the
-`Filtered` function takes a list and a function, returning
-all elements of the list which satisfy the function.
-`IsEvenInt`, unsurprisingly, checks if an integer is even!
-
+used as arguments of other functions, as we will see later.
+They can be defined very compactly using the arrow notation:
 ~~~
-Filtered( [2,9,6,3,4,5], IsEvenInt);
+f:=x->2*x+18;;
+f(3);
 ~~~
 {: .source}
 
 ~~~
-[ 2, 6, 4 ]
+24
 ~~~
 {: .output}
 
@@ -453,12 +450,31 @@ gap> elts[1]; elts[3]; Length(elts);
 ~~~
 {: .output}
 
+We can access elements of lists and we can also dynamically change the length of a list by adding new elements:
+
+~~~
+L:=[3,4];;
+L;
+L[1]:=2;;
+L;
+Add(L, 3];;
+L;
+~~~
+{ : .source}
+~~~
+[3,4]
+[2,4]
+[2,4,3]
+~~~
+{: .output}
+
+
 Note that a list in GAP is not necessarily dense, i.e. it may contain holes:
 ~~~
 [3,,4]
 ~~~
 {: .source}
-This is a list of length 3!.
+This is a list of length 3!
 
 Another difference to other languages you might know is that the elements of a list
 are not necessarily of the same type:
@@ -467,6 +483,7 @@ are not necessarily of the same type:
 [3, [1,2,3], (4,5)(2,3)]
 ~~~
 {: .source}
+
 
 > ## Lists are more than arrays
 >
@@ -560,9 +577,24 @@ s/Length(elts);
 ~~~
 {: .output}
 
-However, often there are more compact ways of doing things. Here is a very
-short way
+We can state this in a much more compact way as we will now see:
+GAP has very helpful list manipulation tools. 
+Here we use the fact that functions in objects in GAP so they
+can be the argument of a function. 
 
+* `List(L,F)` makes a new list where the function `F` is applied to each
+   member of the list `L`.
+~~~
+f:=x->2*x+18;;
+List([1..5], f); 
+~~~
+{: .source}
+~~~
+[ 20, 22, 24, 26, 28 ];
+~~~
+{: .output}
+
+We now use this to state our computation concisely:
 ~~~
 Sum( List( elts, Order ) ) / Length( elts );
 ~~~
@@ -573,26 +605,25 @@ Sum( List( elts, Order ) ) / Length( elts );
 ~~~
 {: .output}
 
-Let's break this last part down:
+Note that `Sum` takes a list as its argument and returns the sum of its entries.
 
-* `Order` find the order of a single permutation.
-* `List(L,F)` makes a new list where the function `F` is applied to each
-   member of the list `L`.
-* `Sum(L)` adds up the members of a list `L`.
+Let's consider another tool to manipulate list. Often we need to get all elements
+from a list that satisfy a certain condition. For example we might need a list
+containing all even numbers between 1 and 20. This is done by the commmand `Filtered`, 
+where `Filtered(L, F)` is the list containing all elements `l` of `L` for which `F(l)=true`.
+~~~
+Filtered([1..20], IsEvenInt]);
+~~~
+{: .source}
 
-> ## Which approach is better?
->
-> Compare these approaches. Which one would you prefer to use?
-{: .callout}
+~~~
+[2,4,6,8,10,12,14,16,18]
+~~~
+{: .output}
 
-
-GAP has very helpful list manipulation tools. We will now show a few more examples:
-
-Often when using these functions, GAP does not quite have the right function,
-for example `NrMovedPoints` give the number of moved points of a permutation,
-but what if we want to find all permutations which move `4` points? This is where
-GAP's arrow notation comes in. `g -> e` makes a new function which takes one argument `g`,
-and returns the value of the expression `e`. Here are some examples:
+We study some more methods to get information from lists. The function 
+`NrMovedPoints` gives the number of moved points of a permutation.
+ 
 
 * finding elements of `G` having no fixed points:
 
@@ -630,15 +661,16 @@ true
 ~~~
 {: .output}
 
-* checking whether any elements of `G` move the point 1 to 2:
+Finally, there are the functions `ForAll` and `ForAny` that work just like the quantifiers of the same name:
+* checking whether all non-identity elements of `G` move at least 2 points:
 
 ~~~
-ForAll( elts, g -> 1^g <> 2 );
+ForAll( elts, g -> g=() or NrMovedPoints(g)>=2 );
 ~~~
 {: .source}
 
 ~~~
-false
+true
 ~~~
 {: .output}
 
@@ -654,9 +686,48 @@ false
 ~~~
 {: .output}
 
-> ## Use list operations to select from `elts` the stabiliser of the point 2 and the centraliser of the permutation (1,2)
+> ## List operations
+> 
+> Use list operations to solve the following:
 >
-> * `Filtered( elts, g -> 2^g = 2 );`
+> * Select from `elts` the stabiliser of the point 2.
+> * Select from `elts` the centraliser of the permutation (1,2)
+> * Find the number of elements in `elts` of order 3.
+> * Does `G` contain an element of order 5?
+> 
+> > ## Solutions: 
+> > * `Filtered( elts, g -> 2^g = 2 );`
+> > * `Filtered( elts, g -> (1,2)^g = (1,2) );`
+> > * `Length(Filtered(elts, g-> Order(g)=3));`
+> {: .solution}
+{: .challenge}
+
+
+> ## Absolute vs Relative Paths
 >
-> * `Filtered( elts, g -> (1,2)^g = (1,2) );`
+> Starting from `/Users/amanda/data/`,
+> which of the following commands could Amanda use to navigate to her home directory,
+> which is `/Users/amanda`?
+>
+> 1. `cd .`
+> 2. `cd /`
+> 3. `cd /home/amanda`
+> 4. `cd ../..`
+> 5. `cd ~`
+> 6. `cd home`
+> 7. `cd ~/data/..`
+> 8. `cd`
+> 9. `cd ..`
+>
+> > ## Solution
+> > 1. No: `.` stands for the current directory.
+> > 2. No: `/` stands for the root directory.
+> > 3. No: Amanda's home directory is `/Users/amanda`.
+> > 4. No: this goes up two levels, i.e. ends in `/Users`.
+> > 5. Yes: `~` stands for the user's home directory, in this case `/Users/amanda`.
+> > 6. No: this would navigate into a directory `home` in the current directory if it exists.
+> > 7. Yes: unnecessarily complicated, but correct.
+> > 8. Yes: shortcut to go back to the user's home directory.
+> > 9. Yes: goes up one level.
+> {: .solution}
 {: .challenge}
