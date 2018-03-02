@@ -39,9 +39,9 @@ pasting the GAP session with all GAP prompts, inputs and outputs into a
 text file (a test file could also be created from the log file with a
 GAP session recorded with the help of `LogTo`). During the test, GAP will
 run all inputs from the test, compare the outputs with those in the test
-file and will report any differences.
+file and report any differences.
 
-GAP test files are just text files, but the common practice is to name
+GAP test files are just text files but the common practice is to name
 them with the extension `.tst`. Now create the file `avgord.tst` (for simplicity in the current directory) with the following content:
 
 ~~~
@@ -60,7 +60,10 @@ where they may be placed, because one should be able to distinguish comments
 in the test file from GAP output started with `#`. For that purpose
 lines at the beginning of the test file that start with `#` and one empty line
 together with one or more lines starting with `#` are considered as comments.
-All other lines are considered GAP output from the preceding GAP input.
+All other lines are considered GAP output from the preceding GAP input. Please be careful:
+By default, the `Test` function considers blank spaces and additional empty lines as a difference in the output. 
+TODO: Bsp mit Whitespaces und FAIL
+
 
 To run the test, one should use the function `Test`, as documented [here](http://www.gap-system.org/Manuals/doc/ref/chap7.html#X87712F9D8732193C).
 For example (assuming that the function `AvgOrdOfGroup` is already loaded):
@@ -105,16 +108,6 @@ gap> G:=TrivialGroup();; # suppress output
 gap> AvgOrdOfGroup(G);
 1
 
-# fp group
-gap> F:=FreeGroup("a","b");
-<free group on the generators [ a, b ]>
-gap> G:=F/ParseRelators(GeneratorsOfGroup(F),"a^8=b^2=1, b^-1ab=a^-1");
-<fp group on the generators [ a, b ]>
-gap> IsFinite(G);
-true
-gap> AvgOrdOfGroup(G);
-59/16
-
 # finite matrix group over integers
 
 # matrix group over a finite field
@@ -135,11 +128,24 @@ true
 ~~~
 {: .output}
 
-Now we will work on a better implementation. Of course, the order of an element
-is an invariant of a conjugacy class of elements of a group, so we need only to
-know the orders of conjugacy classes of elements and their representatives. The
-following code, being added into `avgord.g`, reads into GAP and returns the answer
-without going into an error
+We have not used the underlying group sructure in our `AvgOrdOfGroup` function. It works just as fine 
+on a set of permutation not forming a group as the following example shows:
+
+~~~
+gap> coll := [(1,2,3),(2,3,4),(8,9,3),(1,2)];
+[ (1,2,3), (2,3,4), (3,8,9), (1,2) ]
+gap> AvgOrdOfGroup(coll);                
+11/4
+gap> IsInt(last);
+false
+
+~~~
+
+We now want to work on a better implementation of `AvgOrdOfGroup` using the group structure of 
+the argument. For this purpose, we rename our original function to `AvgOrdOfCollection` and define 
+a new `AvgOrdOfGroup` function. Using the fact that the order of an element is invariant
+under conjugation we compute the conjugacy classes of elements and one representative of each class.
+This yields the following improved version of `AvgOrdOfGroup` that should be added into `avgord.g`.
 
 ~~~
 AvgOrdOfGroup := function(G)
@@ -179,15 +185,7 @@ AvgOrdOfGroup(D);
 # But found:
 2862481/512
 ########
-########> Diff in avgord.tst, line 23:
-# Input is:
-AvgOrdOfGroup(G);
-# Expected output:
-59/16
-# But found:
-189/16
-########
-########> Diff in avgord.tst, line 29:
+########> Diff in avgord.tst, line 21:
 # Input is:
 AvgOrdOfGroup(SL(2,5));
 # Expected output:
@@ -199,8 +197,7 @@ false
 ~~~
 {: .output}
 
-Indeed, we made (deliberately) a typo and replaced `Size(c)` by `Size(cc)`.
-The correct version of course should look as follows:
+Indeed, we deliberately made a typo and replaced `Size(c)` by `Size(cc)`. The correct version should look as follows:
 
 ~~~
 AvgOrdOfGroup := function(G)
@@ -215,8 +212,7 @@ end;
 ~~~
 {: .source}
 
-Now we will fix this in `avgord.g`, and read and test it again to check that
-the tests run correctly.
+Fixing this error in `avgord.g` reading the file again and running the test one more time yields:
 
 ~~~
 Read("avgord.g");
