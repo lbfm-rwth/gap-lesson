@@ -16,7 +16,6 @@ keypoints:
 - "Use `?` and `??` to view help pages."
 - "Use `LogTo` function to save all GAP input and output into a text file."
 - "If calculation takes too long, press <Control>-C to interrupt it."
-- "Read 'A First Session with GAP' from the GAP Tutorial."
 ---
 
 If GAP is installed correctly you should be able to start it. Exactly how 
@@ -581,8 +580,7 @@ We can state this in a much more compact way as we will now see:
 GAP has very helpful list manipulation tools. 
 Here we use the fact that functions in objects in GAP so they
 can be the argument of a function. 
-
-* `List(L,F)` makes a new list where the function `F` is applied to each
+`List(L,F)` makes a new list where the function `F` is applied to each
    member of the list `L`.
 ~~~
 f:=x->2*x+18;;
@@ -691,7 +689,7 @@ false
 > Use list operations to solve the following:
 >
 > * Select from `elts` the stabiliser of the point 2.
-> * Select from `elts` the centraliser of the permutation (1,2)
+> * Select from `elts` the centraliser of the permutation (1,2).
 > * Find the number of elements in `elts` of order 3.
 > * Does `G` contain an element of order 5?
 > 
