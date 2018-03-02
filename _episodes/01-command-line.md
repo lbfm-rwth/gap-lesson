@@ -693,7 +693,7 @@ false
 > * Find the number of elements in `elts` of order 3.
 > * Does `G` contain an element of order 5?
 
-> > Solutions: 
+> > ## Solutions: 
 > >
 > > * `Filtered( elts, g -> 2^g = 2 );`
 > >
