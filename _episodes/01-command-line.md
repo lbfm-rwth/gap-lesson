@@ -422,6 +422,9 @@ gap> elts[1]; elts[3]; Length(elts);
 ~~~
 {: .output}
 
+TODO:
+- add more operations for lists: Append, Concatenation
+
 We can access elements of lists and we can also dynamically change the length of a list by adding new elements:
 
 ~~~
@@ -432,7 +435,7 @@ L;
 Add(L, 3];;
 L;
 ~~~
-{ : .source}
+{: .source}
 ~~~
 [3,4]
 [2,4]
@@ -448,8 +451,8 @@ Note that a list in GAP is not necessarily dense, i.e. it may contain holes:
 {: .source}
 This is a list of length 3!
 
-Another difference to other languages you might know is that the elements of a list
-are not necessarily of the same type:
+An important difference to statically-typed languages you might know is that the elements of a list
+need not be of the same type:
 
 ~~~
 [3, [1,2,3], (4,5)(2,3)]
@@ -470,7 +473,9 @@ are not necessarily of the same type:
 {: .callout}
 
 Many functions in GAP refer to `Set`s. A set in GAP is just a list with
-no repetitions, no holes, and elements in increasing order. Here are some examples:
+no repetitions, no holes, and elements in increasing order. Clearly, this only works
+if GAP knows how to compare the elements.
+Here are some examples:
 
 ~~~
 gap> IsSet([1,3,5]); IsSet([1,5,3]); IsSet([1,3,3]);
@@ -484,7 +489,7 @@ false
 ~~~
 {: .output}
 
-Now let us consider an interesting calculation -- the average order of elements
+We continue with our example -- the average order of elements
 of `G`. There are many different ways to do this, we will consider a few of them
 here.
 
@@ -551,8 +556,8 @@ s/Length(elts);
 
 We can state this in a much more compact way as we will now see:
 GAP has very helpful list manipulation tools. 
-Here we use the fact that functions in objects in GAP so they
-can be the argument of a function. 
+Here we use the fact that functions are objects in GAP and so they
+can also be an argument of a function. 
 `List(L,F)` makes a new list where the function `F` is applied to each
    member of the list `L`.
 ~~~
@@ -577,6 +582,13 @@ Sum( List( elts, Order ) ) / Length( elts );
 {: .output}
 
 Note that `Sum` takes a list as its argument and returns the sum of its entries.
+
+> ## TODO: functional programming
+>
+> * explain functional (no side-effects) vs with-side-effects
+> * convention: side effects are verbs, no side-effects are nouns
+> * can be very elegant but also very unreadable. Choose wisely!
+
 
 Let's consider another tool to manipulate list. Often we need to get all elements
 from a list that satisfy a certain condition. For example we might need a list
@@ -620,6 +632,7 @@ First( elts, g -> (1,2)^g = (2,3) );
 ~~~
 {: .output}
 
+TODO: Make callout and key point
 Let's check this (remember that in GAP permutations are multiplied from left to right!):
 
 ~~~
@@ -661,8 +674,8 @@ false
 > 
 > Use list operations to solve the following:
 >
-> * Select from `elts` the stabiliser of the point 2.
-> * Select from `elts` the centraliser of the permutation (1,2).
+> * Select from `elts` the elements that stabilise the point 2.
+> * Select from `elts` the elements that centralise the permutation (1,2).
 > * Find the number of elements in `elts` of order 3.
 > * Does `G` contain an element of order 5?
 > 
