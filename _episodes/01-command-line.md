@@ -694,6 +694,7 @@ false
 > * Select from `elts` the centraliser of the permutation (1,2)
 > * Find the number of elements in `elts` of order 3.
 > * Does `G` contain an element of order 5?
+> 
 > > ## Solutions: 
 > > * `Filtered( elts, g -> 2^g = 2 );`
 > > * `Filtered( elts, g -> (1,2)^g = (1,2) );`
