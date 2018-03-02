@@ -59,7 +59,7 @@ in different colours:
 The easiest way to start trying GAP out is as a calculator:
 
 ~~~
-( 1 + 2^32 ) / (1 - 2*3*107 );
+This is a test ( 1 + 2^32 ) / (1 - 2*3*107 );
 ~~~
 {: .source}
 
