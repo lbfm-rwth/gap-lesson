@@ -52,7 +52,7 @@ including this one, must be finished with a semicolon!
 The easiest way to start trying GAP out is as a calculator:
 
 ~~~
-( 1 + 2^32 ) / (1 - 2*3*107 );
+(1 + 2^32) / (1 - 2*3*107);
 ~~~
 {: .source}
 
@@ -68,7 +68,7 @@ the formula again, then press `<Return>` (the location of the cursor in the comm
 line does not matter):
 
 ~~~
-( 1 + 2^32 ) / (1 - 2*3*107 );
+(1 + 2^32) / (1 - 2*3*107);
 ~~~
 {: .source}
 
@@ -85,7 +85,7 @@ line, respectively). Now press the `<Return>` key (at any position of the
 cursor in the command line):
 
 ~~~
-( 1 + 2^64 ) / (1 - 2*3*107 );
+(1 + 2^64) / (1 - 2*3*107);
 ~~~
 {: .source}
 
@@ -713,7 +713,7 @@ We study some more methods to get information from lists.
 * finding elements of `G` having no fixed points:
 
 ~~~
-Filtered( elts, g -> NrMovedPoints(g) = 4 );
+Filtered(elts, g -> NrMovedPoints(g) = 4);
 ~~~
 {: .source}
 
@@ -725,7 +725,7 @@ Filtered( elts, g -> NrMovedPoints(g) = 4 );
 * finding a permutation `g` that conjugates (1,2) to (2,3)
 
 ~~~
-First( elts, g -> (1,2)^g = (2,3) );
+First(elts, g -> (1,2)^g = (2,3));
 ~~~
 {: .source}
 
@@ -755,7 +755,7 @@ Finally, there are the functions `ForAll` and `ForAny` that work just like the q
 * checking whether all non-identity elements of `G` move at least 2 points:
 
 ~~~
-ForAll( elts, g -> g=() or NrMovedPoints(g)>=2 );
+ForAll(elts, g -> g=() or NrMovedPoints(g)>=2);
 ~~~
 {: .source}
 
@@ -767,7 +767,7 @@ true
 * checking whether there is an element in `G` which moves exactly two points:
 
 ~~~
-ForAny( elts, g -> NrMovedPoints(g) = 2 );
+ForAny(elts, g -> NrMovedPoints(g) = 2);
 ~~~
 {: .source}
 
@@ -786,8 +786,8 @@ false
 > * Does `G` contain an element of order `5`?
 >
 > > ## Solutions:
-> > * `Filtered( elts, g -> 2^g = 2 );`
-> > * `Filtered( elts, g -> (1,2)^g = (1,2) );`
+> > * `Filtered(elts, g -> 2^g = 2);`
+> > * `Filtered(elts, g -> (1,2)^g = (1,2));`
 > > * `Length(Filtered(elts, g-> Order(g)=3));`
 > > * `ForAny(elts, g-> Order(g)=5);`
 > {: .solution}
