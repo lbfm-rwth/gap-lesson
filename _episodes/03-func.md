@@ -393,7 +393,7 @@ brk>
 {: .error}
 
 from which you can exit by entering `quit;`.
-TODO: expand on the break loop! show that you can access local variables. This is nothing short of an **interactive debugger**!
+
 
 What happens next demonstrates how things may go wrong:
 
@@ -428,6 +428,53 @@ sum; g;
 (1,2)(3,10,5,6,8,9)(4,7,11)
 ~~~
 {: .output}
+
+Finally, let us use our example to see the power of the `break` loop. 
+Suppose our only change from the working code was commenting out
+the initialisation of `sum`. Assume that we have just started a new session and used
+`Read` to get our new definition of `AvgOrdOfGroup`.
+~~~
+AvgOrdOfGroup := function(G)
+local sum, g;
+#sum := 0;
+for g in G do
+  sum := sum + Order(g);
+od;
+return sum/Size(G);
+end;
+~~~
+{: .source}
+Let this run:
+
+~~~
+AvgOrdOfGroup(M11);
+~~~
+{: .source}
+
+~~~
+Error, Variable: 'sum' must have an assigned value in
+  sum := sum + Order( g ); called from
+<function "AvgOrdOfGroup">( <arguments> )
+ called from read-eval loop at line 24 of *stdin*
+you can 'return;' after assigning a value
+brk>
+~~~
+{: .error}
+GAP has entered the `break` loop because something went wrong _while running AvgOrdOfGroup_.
+While it is rather easy to find out what went wrong from the error message
+in this case, it might be much harder to debug more complicated code.
+The `break` loop can be extremely helpful in this case as it "knows" local
+variables (Note that there are currently no global variables `G` or `g`):
+~~~
+brk> G;g;
+~~~
+{: .error}
+~~~
+Group([ (1,2,3,4,5,6,7,8,9,10,11), (3,7,11,8)(4,10,5,6) ])
+()
+~~~
+{: .output}
+We now use `quit;` to leave the break loop.
 
 Now, before reading the next part of the lesson, please
 revert the last change by uncommenting the two commented lines, so that
