@@ -229,11 +229,17 @@ gap> k := Maximum( List( c, v -> v[2] ) ); Filtered( c, v -> v[2] = 7 );
 > to make yourself familiar with the usage of conditional statements in GAP.
 > > ## Solution
 > > ~~~
-> > `maxletters:=[];`
-> > `maxvalue:=0;`
-> > `for w in c do`
-> > `if w[2]=maxvalue then Add(maxletters, w[1]);`
-> > `else if w[2]>maxvalue then maxletters:=[w[1]]; maxvalue:=w[2]; fi;fi;`
+> > maxletters:=[];
+> > maxvalue:=0;
+> > for w in c do
+> > 	if w[2]=maxvalue then
+> > 		Add(maxletters, w[1]);
+> > 	else if w[2]>maxvalue then 
+> > 				maxletters:=[w[1]]; 
+> > 				maxvalue:=w[2];
+> > 			fi;
+> > 	fi;
+> > od;
 > > ~~~
 > > {: .source}
 > {: .solution}
