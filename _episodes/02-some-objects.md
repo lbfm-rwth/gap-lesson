@@ -232,13 +232,13 @@ gap> k := Maximum( List( c, v -> v[2] ) ); Filtered( c, v -> v[2] = 7 );
 > > maxletters:=[];
 > > maxvalue:=0;
 > > for w in c do
-> > 	if w[2]=maxvalue then
-> > 		Add(maxletters, w[1]);
+> >   if w[2]=maxvalue then
+> > 	  Add(maxletters, w[1]);
 > > 	else if w[2]>maxvalue then 
-> > 				maxletters:=[w[1]]; 
-> > 				maxvalue:=w[2];
-> > 			fi;
-> > 	fi;
+> > 	    maxletters:=[w[1]]; 
+> > 	    maxvalue:=w[2];
+> > 	    fi;
+> >   fi;
 > > od;
 > > ~~~
 > > {: .source}
