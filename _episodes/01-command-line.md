@@ -45,9 +45,8 @@ gap>
 To leave GAP, type `quit;` at the GAP prompt. Remember that all GAP commands,
 including this one, must be finished with a semicolon!
 
-~~~
-Practice entering `quit;` to leave GAP, and then start a new GAP session.
-~~~
+> ## Quit and start GAP
+> Practice entering `quit;` to leave GAP, and then start a new GAP session.
 {: .challenge}
 
 The easiest way to start trying GAP out is as a calculator:
@@ -95,10 +94,9 @@ cursor in the command line):
 ~~~
 {: .output}
 
-~~~
-Enter any command into your command line and press `<Enter>`.
-Press `<Up>` to repeat the command and modify it.
-~~~
+> ## Use the history
+> Enter any command into your command line and press `<Enter>`.
+> Press `<Up>` to repeat the command and modify it.
 {: .challenge}
 
 It is useful to know that if the command line history is long, one can
@@ -272,9 +270,9 @@ or `NaturalHomomorphismByNormalSubgroup` using completion.
 
 > ## Always use Tab completion
 >
-> * it will save you time
+> * It will save you time.
 >
-> * you will notice immediately whether you misspelled a name
+> * You will notice immediately whether you misspelled a name.
 >
 {: .callout}
 
@@ -353,6 +351,14 @@ you replace `11` with whatever number appears before `Reference: Groups` on your
 If you are viewing the GAP documentation in a terminal, you might find it helpful to
 open two copies of GAP, one for reading documentation and one for writing code!
 
+> ## The Help System
+>
+> * Use `?` and `??` to view help pages.
+>
+> * You can view the documentation in the terminal, [online](https://www.gap-system.org/Doc/manuals.html), or download it as
+>   a [pdf file](https://www.gap-system.org/Doc/manuals.html).
+{: .callout}
+
 This guide shows how permutations in GAP are written in cycle notation, and also
 shows common functions which are used with groups.
 
@@ -390,9 +396,8 @@ false
 
 Our next task is to find out how to obtain a list of elements and their orders.
 
-~~~
-Enter `?elements` and explore the list of help topics.
-~~~
+> ## `?elements`
+> Enter `?elements` and explore the list of help topics.
 {: .challenge}
 
 After its inspection,
@@ -483,13 +488,13 @@ need not be of the same type:
 
 > ## Lists are more than arrays
 >
-> * May contain holes or be empty
+> * May contain holes or be empty.
 >
-> * May dynamically change their length (with `Add`, `Append` or direct assigment)
+> * May dynamically change their length (with `Add`, `Append` or direct assigment).
 >
-> * Not required to contain objects of the same type
+> * Not required to contain objects of the same type.
 >
-> * See more in [GAP Tutorial: Lists and Records](http://www.gap-system.org/Manuals/doc/tut/chap3.html)
+> * See more in [GAP Tutorial: Lists and Records](http://www.gap-system.org/Manuals/doc/tut/chap3.html).
 {: .callout}
 
 Many functions in GAP refer to `Set`s. A set in GAP is just a list with
@@ -518,7 +523,7 @@ This general form of a `for` loop is:
 
 ~~~
 for val in collection do
-  <something with val>
+  <do something with val>
 od;
 ~~~
 {: .source}
@@ -562,8 +567,8 @@ and use `elts` like an array:
 
 ~~~
 s := 0;;
-for i in [ 1 .. Length(elts) ] do
-  s  :=  s + Order( elts[i] );
+for i in [1 .. Length(elts)] do
+  s  :=  s + Order(elts[i]);
 od;
 s / Length(elts);
 ~~~
@@ -598,7 +603,7 @@ l;
 Note that this does not change `l`.
 We now use this to state our computation concisely:
 ~~~
-Sum( List( elts, Order ) ) / Length( elts );
+Sum(List(elts, Order)) / Length(elts);
 ~~~
 {: .source}
 
@@ -614,12 +619,21 @@ _functional programming_ style.
 Functional programming refers to the idea that the result of a function
 _only_ depends on the values of its arguments and does not change _any_ variables
 but returns a new object.
+This makes programs much more safe to use and to understand.
+To say it with Donald Knuth:
+> ## Premature optimization is the root of all evil
+>
+> >Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered.
+> >We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil.
+> >Yet we should not pass up our opportunities in that critical 3%.
+{: .callout}
 
 > ## Functional programming
 >
-> * functions do not have side-effects
-> * the `map` command is an analogue to GAP's `List` in other languages
-> * can be very elegant but also quickly becomes unreadable. Choose wisely!
+> * Functions do not have side-effects.
+> * In other languages the `map` command is an analogue to GAP's `List`.
+> * Can be very elegant but nested `List` statements quickly become unreadable.
+>   Choose wisely!
 {: .callout}
 
 Note that for many list operations there are both functions that create a new list and
@@ -653,9 +667,9 @@ L;
 > ## Functional programming in GAP
 >
 > Convention:
-> * names of functions with side effects are verbs
+> * Names of functions with side effects are verbs.
 >
-> * names of functions without side effects are nouns
+> * Names of functions without side effects are nouns.
 {: .callout}
 
 > ## The `->` constructor
