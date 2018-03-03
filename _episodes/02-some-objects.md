@@ -111,12 +111,12 @@ RecNames(date);
 > Create a record `weather` having several fields that can be used to describe the current weather.
 >
 > > ## Solution
-> > `weather:=rec();`
-> > `weather.temperature:=4;`
-> > `weather.humidity:=0.4;`
-> > `weather.description:="partially cloudy";`
-> > `weather.precipitation:=0.5;`
-> {: .solution
+> > * `weather:=rec();`
+> > * `weather.temperature:=4;`
+> > * `weather.humidity:=0.4;`
+> > * `weather.description:="partially cloudy";`
+> > * `weather.precipitation:=0.5;`
+> {: .solution}
 {: .challenge}
 
 Next, there are **strings** and **characters**. While strings are printed specially by GAP, a string is really just a list of characters, and any function which takes a list will also take a string.
@@ -228,10 +228,13 @@ gap> k := Maximum( List( c, v -> v[2] ) ); Filtered( c, v -> v[2] = 7 );
 > `Filtered` or `List`. Instead, you could use a suitable loop and use `?if`
 > to make yourself familiar with the usage of conditional statements in GAP.
 > > ## Solution
+> > ~~~
 > > `maxletters:=[];`
 > > `maxvalue:=0;`
 > > `for w in c do`
 > > `if w[2]=maxvalue then Add(maxletters, w[1]);`
 > > `else if w[2]>maxvalue then maxletters:=[w[1]]; maxvalue:=w[2]; fi;fi;`
+> > ~~~
+> > {: .source}
 > {: .solution}
 {: .challenge}
