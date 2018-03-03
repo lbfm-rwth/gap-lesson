@@ -116,7 +116,8 @@ RecNames(date);
 > > `weather.humidity:=0.4;`
 > > `weather.description:="partially cloudy";`
 > > `weather.precipitation:=0.5;`
-{. .challenge}
+> {: .solution
+{: .challenge}
 
 Next, there are **strings** and **characters**. While strings are printed specially by GAP, a string is really just a list of characters, and any function which takes a list will also take a string.
 
@@ -223,4 +224,14 @@ gap> k := Maximum( List( c, v -> v[2] ) ); Filtered( c, v -> v[2] = 7 );
 > and memory penalties. Try to find the 
 > letter(s) occuring most often using one pass over the list `c` without producing an intermediate
 > list.
+> You might find it hard to do this using list comprehension techniques such as
+> `Filtered` or `List`. Instead, you could use a suitable loop and use `?if`
+> to make yourself familiar with the usage of conditional statements in GAP.
+> > ## Solution
+> > `maxletters:=[];`
+> > `maxvalue:=0;`
+> > `for w in c do`
+> > `if w[2]=maxvalue then Add(maxletters, w[1]);`
+> > `else if w[2]>maxvalue then maxletters:=[w[1]]; maxvalue:=w[2]; fi;fi;`
+> {: .solution}
 {: .challenge}
