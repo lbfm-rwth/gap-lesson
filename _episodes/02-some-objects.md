@@ -8,7 +8,7 @@ objectives:
 - "See examples of types that are built-in in GAP but may be missing in other systems"
 - "See examples of list arithmetic"
 keypoints:
-- "GAP has a plethora of variious immediate, positional and component objects."
+- "GAP has a plethora of various immediate, positional and component objects."
 - "List arithmetic is very flexible and powerful."
 - "Objects like lists and records are good to keep structured and related data."
 ---
@@ -25,7 +25,7 @@ In this section, we will demonstrate some other examples of basic objects
 existing in GAP (the system is extendable, so one can introduce new types
 of objects, but this is beyond the scope of this lesson!).
 
-Some other immediate objects are floats, cyclotomics and finite field elements:
+Some other immediate objects are floats and finite field elements:
 
 ~~~
 1.15; Float(1232/3456567);
@@ -38,18 +38,8 @@ Some other immediate objects are floats, cyclotomics and finite field elements:
 ~~~
 {: .output}
 
-~~~
-E(4); E(4)^2; E(6);
-~~~
-{: .source}
-
-~~~
-E(4)
--1
--E(3)^2
-~~~
-{: .output}
-
+The elements of a finite field `GF(q)` with `q` elements
+are denoted in terms of `Z(q)` which is a generator its multiplicative group.
 ~~~
 AsList(GF(2)); Z(5); Z(5)^4;
 ~~~
@@ -219,7 +209,7 @@ gap> k := Maximum( List( c, v -> v[2] ) ); Filtered( c, v -> v[2] = 7 );
 > iterates over the list `c` two times (in `List` and in `Filtered`), and
 > it also iterates over another list of the same length as `c` in the call
 > to `Maximum`. If the list is long, this will impose certain performance
-> and memory penalties. Try to write the code which find the most occurring
-> letter(s) using one pass over the list `c` without producing an intermediate
+> and memory penalties. Try to find the 
+> letter(s) occuring most often using one pass over the list `c` without producing an intermediate
 > list.
 {: .challenge}
