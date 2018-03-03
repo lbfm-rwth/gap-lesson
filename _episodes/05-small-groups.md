@@ -18,8 +18,8 @@ keypoints:
 In this section we are interested in finding some non-trivial groups whose average order of 
 elements is an integer.
 
-The GAP distribution includes a number of data libraries. An overview of these 
-libraries can be found [here](http://www.gap-system.org/Datalib/datalib.html).
+The GAP distribution includes a number of data libraries, an overview of which
+can be found [here](http://www.gap-system.org/Datalib/datalib.html).
 One of them is the [Small Groups Library](http://www.gap-system.org/Packages/sgl.html) by
 Hans Ulrich Besche, Bettina Eick and Eamonn O'Brien which we want to use in this chapter. First,
 we have a look at how to work with the Small Groups Library before using it to methodically search for groups with the
@@ -52,7 +52,7 @@ gap> NrSmallGroups(64)
 ~~~
 {: .output}
 
-shows, that there are 267 groups of order 64. Here a few other key functions of the package:
+shows that there are 267 groups of order 64. Here are a few other key functions of the package:
 ~~~
 gap> SmallGroupsInformation(64);
 
@@ -80,11 +80,9 @@ gap> AllSmallGroups(Size,64,NilpotencyClassOfGroup,5);
   <pc group of size 64 with 6 generators> ]
 gap> List(last,IdGroup);
 [ [ 64, 52 ], [ 64, 53 ], [ 64, 54 ] ]
-gap> AllSmallGroups(64, IsAbelian); 
-[ <pc group of size 64 with 6 generators>, <pc group of size 64 with 6 generators>, <pc group of size 64 with 6 generators>, 
-  <pc group of size 64 with 6 generators>, <pc group of size 64 with 6 generators>, <pc group of size 64 with 6 generators>, 
-  <pc group of size 64 with 6 generators>, <pc group of size 64 with 6 generators>, <pc group of size 64 with 6 generators>, 
-  <pc group of size 64 with 6 generators>, <pc group of size 64 with 6 generators> ]
+gap> AllSmallGroups(64, IsAbelian);;
+gap> List(last, IdGroup);
+[ [ 64, 1 ], [ 64, 2 ], [ 64, 26 ], [ 64, 50 ], [ 64, 55 ], [ 64, 83 ], [ 64, 183 ], [ 64, 192 ], [ 64, 246 ], [ 64, 260 ], [ 64, 267 ] ]
 gap> Size(last);
 11
 gap> AllSmallGroups(64, IsSolubleGroup);;
@@ -95,7 +93,7 @@ gap> Size(last);
 
 `SmallGroupsInformation` gives us basic informations about the small groups of a given size as well as precomputed
 information about these groups.
-The fuction `AllSmallGroups` returns all small groups with a given size provided as the argument. However, it is possible
+The function `AllSmallGroups` returns all small groups with a given size provided as the argument. However, it is possible
 to use a filter to search for small groups of a given size with additional properies such as abelian groups, 
 groups with given nilpotency class, cyclic groups and soluble groups.
 One can also use this library to identify a given group with a small group. For example
@@ -132,7 +130,7 @@ TestOneGroup := G -> IsInt( AvgOrdOfGroup(G) );
 ~~~
 {: .source}
 
-Now try, for example
+Now let us try
 
 ~~~
 List([TrivialGroup(),Group((1,2))],TestOneGroup);
@@ -162,7 +160,7 @@ gap> AllSmallGroups(Size,24,TestOneGroup,true);
 
 Let us first design a rudimentary function testing all groups of a given order and returning
 a group with an integer average order of its elements as soon as one is found and `fail`, which is a special boolen variable
-in GAP, ortherwise. 
+in GAP, otherwise. 
 
 ~~~
 TestOneOrderEasy := function(n)
@@ -202,7 +200,7 @@ fail
 > ## `AllSmallGroups` runs out of memory - what to do?
 >
 > * Use iteration over `[1..NrSmallGroups(n)]` as shown in the function above
-> * Use `IdsOfAllSmallGroups` which accepts same arguments as `AllSmallGroups`
+> * Use `IdsOfAllSmallGroups` which accepts the same arguments as `AllSmallGroups`
 > but returns ids instead of groups.
 {: .callout}
 
@@ -228,7 +226,7 @@ end;
 ~~~
 {: .source}
 
-For example,
+For instance,
 
 ~~~
 TestOneOrder(TestOneGroup,64);
@@ -243,7 +241,7 @@ fail
 ~~~
 {: .output}
 
-We suspect that groups with integer average order of its elements are rather rare, hence it is practical to 
+We suspect that groups with integer average order of its elements are rather rare. Hence it is practical to 
 write a function checking the groups of order 2 up to `n` for the desired property. Additionally
 we want the function to return a group with integer average order of its elements as soon as one is found.
 
@@ -289,7 +287,7 @@ TestAllOrders(TestOneGroup,128);
 ~~~
 {: .output}
 
-Our function tells us, that `SmallGroup(105,1)` has an integer average order of elements.
+Our function tells us that `SmallGroup(105,1)` has an integer average order of elements.
 
 Let us have a closer look at the group we just found. For example, its isomorphism typ is of interest. 
 It can be computed using the GAP function `StructureDescription`. Check [here](http://www.gap-system.org/Manuals/doc/ref/chap39.html#X87BF1B887C91CA2E) for further information.
@@ -316,7 +314,6 @@ gap> NrSmallGroups(105);
 we check the 2nd group of order 105 manually and continue checking the groups of order 106 up to 256 methodically.
 
 ~~~
-
 gap> TestOneGroup(SmallGroup(105,2));
 false
 ~~~
@@ -345,14 +342,15 @@ TestRangeOfOrders(TestOneGroup,106,256);
 ~~~
 {: .source}
 
-We notice, that checking 2328 groups of order 128 and 56092 groups of order 256 is not feasible
+We notice that checking 2328 groups of order 128 and 56092 groups of order 256 is not feasible
 and stop the computation.
 
 This is again a situation where theoretical knowledge helps much more than
-a brute-force approach. If the group is a _p_-group, then the order of each
+a brute-force approach. If the group is a _p_-group then the order of each
 conjugacy class of a non-identity element of the group is divisible by _p_;
-therefore, the average order of a group element may not be an integer. Therefore,
-_p_-groups can be excluded from calculation. Let us change our code accordingly:
+therefore, the average order of a group element can not be an integer. Therefore
+_p_-groups can be excluded from our calculation. Let us change our code accordingly using the function
+`IsPrimePowerInt`:
 
 ~~~
 TestRangeOfOrders:=function(f,n1,n2)
@@ -395,18 +393,20 @@ gap> TestRangeOfOrders(TestOneGroup,106,512);
 So we found a group of order 357 satisfying our designated property. Let us have a look at that group:
 
 ~~~
-gap> StructureDescription( SmallGroup(357,1));
+AvgOrdOfGroup( SmallGroup(357,1)); StructureDescription( SmallGroup(357,1));
+65
 "C17 x (C7 : C3)"
 ~~~
 {: .source}
 
-Our next goal is to make our function as flexible and user friendly as possible.
+Our next goal is to make our function as flexible and as user friendly as possible.
 To begin with, we modify `TestOneOrder`.
+
 Firstly, we are going to make `TestOneOrder` variadic, i.e. it may accept two or more
 arguments. We will set 2 as minimum number of arguments, the first two being `f` and `n`,
 as we need to know a testing function `f` as well as the order `n` we want to check.
-We additionally allow for optional arguments that will be storedi in the list `r`, indicated
-by `r..` in the code below. The entries of `r` represent the indentifying number number of 
+We additionally allow for optional arguments that will be stored in the list `r`, indicated
+by `r..` in the code below. The entries of `r` represent the indentifying number of 
 the first and last small group of order `n` we want to check. By default these numbers are equal
 to `1` and `NrSmallGroups(n)`. Because of these modifications we have to validate our input and return
 user-friendly error messages in case of a wrong input.
@@ -430,7 +430,7 @@ InfoSmallGroupsSearch
 ~~~
 {: .output}
 
-Now instead of `Print("something");` one could use
+Now instead of `Print("something");` one can use
 `Info( InfoSmallGroupsSearch, infolevel, "something" );`
 where `infolevel` is a positive integer specifying the level of verbosity.
 This level could be changed to `n` using the command
@@ -515,8 +515,7 @@ gap> TestOneOrderVariadic(IsIntegerAverageOrder,357);
 
 This causes some problems for our test file since the `Test` function
 compares the actual output to the reference output. To resolve
-this problem we run the tests at info level 0 to suppress  
-all additional outputs. 
+this problem we run the tests at info level 0 to suppress all additional output. 
 
 ~~~
 # Finding groups with integer average order
@@ -536,6 +535,8 @@ gap> res;
 {: .output}
 
 > ## Does the Small Groups Library contain another group with this property?
+
+> * Create proper exercises.
 >
 > * What can you say about the order of the groups with this property?
 >
