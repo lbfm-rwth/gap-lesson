@@ -400,21 +400,25 @@ gap> StructureDescription( SmallGroup(357,1));
 ~~~
 {: .source}
 
-The next function shows even further flexibility: it is variadic, i.e.
-it may accept two or more arguments, the first two will be assigned to
-variables `f` and `n`, and the rest will be available in the list `r`
-(this is indicated by `...` after `r`). The first argument is the testing
-function, the second is the order to check, and the third and the fourth
-are the numbers of the first and last groups of this order that should be
-checked. By default, the last two are equal to 1 and `NrSmallGroups(n)`
-respectively. This function also shows how to validate the input and
-produce user-friendly error messages in case of wrong arguments.
+Our next goal is to make our function as flexible and user friendly as possible.
+To begin with, we modify `TestOneOrder`.
+Firstly, we are going to make `TestOneOrder` variadic, i.e. it may accept two or more
+arguments. We will set 2 as minimum number of arguments, the first two being `f` and `n`,
+as we need to know a testing function `f` as well as the order `n` we want to check.
+We additionally allow for optional arguments that will be storedi in the list `r`, indicated
+by `r..` in the code below. The entries of `r` represent the indentifying number number of 
+the first and last small group of order `n` we want to check. By default these numbers are equal
+to `1` and `NrSmallGroups(n)`. Because of these modifications we have to validate our input and return
+user-friendly error messages in case of a wrong input.
 
-In addition, this function demonstrates how to use `Info` messages that
-may be switched on and off by setting appropriate `Info` level. The need
-we address here is to be able to switch the levels of verbosity of the
-output without error-prone approach of walking through the code and commenting
-`Print` statements in and out. It is achieved by creating an info class:
+Secondly we are going to introduce the concept of `Info` messages and `Info` levels. `Info` messages
+may be switched on and off depending on the `Info` level set by the user. The need
+we address here is the ability to switch the levels of verbosity of the
+output without the error-prone approach of walking through the code and commenting
+`Print` statements in and out. Let us have a quick look at `Info` classes before changing the code of 
+our `TestOneGroup` function.
+
+We have to create an `InfoClass` first:
 
 ~~~
 gap> InfoSmallGroupsSearch := NewInfoClass("InfoSmallGroupsSearch");
@@ -488,7 +492,7 @@ end;
 ~~~
 {: .source}
 
-The following example demonstrates how the output now may be controlled
+The following example demonstrates how the output may be controlled
 by switching the info level for `InfoSmallGroupsSearch`:
 
 ~~~
@@ -509,16 +513,13 @@ gap> TestOneOrderVariadic(IsIntegerAverageOrder,357);
 ~~~
 {: .output}
 
-Of course, this now introduces some complication for the test file,
-which compares the actual output with the reference output. To resolve
-this problem, we will decide to run the tests at info level 0 to suppress  
-all additional outputs. Because the tests may have been started in the
-GAP session with a different info level, we will remember that info level
-to restore it after the test:
+This causes some problems for our test file since the `Test` function
+compares the actual output to the reference output. To resolve
+this problem we run the tests at info level 0 to suppress  
+all additional outputs. 
 
 ~~~
 # Finding groups with integer average order
-gap> INFO_SSS:=InfoLevel(InfoSmallGroupsSearch);;
 gap> SetInfoLevel( InfoSmallGroupsSearch, 0);
 gap> res:=[];;
 gap> for n in [1..360] do
@@ -531,7 +532,6 @@ gap> for n in [1..360] do
 >    od;
 gap> res;
 [ [ 1, 1 ], [ 105, 1 ], [ 357, 1 ] ]
-gap> SetInfoLevel( InfoSmallGroupsSearch, INFO_SSS);
 ~~~
 {: .output}
 
