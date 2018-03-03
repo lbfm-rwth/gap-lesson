@@ -107,6 +107,17 @@ RecNames(date);
 ~~~
 {: .output}
 
+> ## Creating a record
+> Create a record `weather` having several fields that can be used to describe the current weather.
+>
+> > ## Solution
+> > `weather:=rec();`
+> > `weather.temperature:=4;`
+> > `weather.humidity:=0.4;`
+> > `weather.description:="partially cloudy";`
+> > `weather.precipitation:=0.5;`
+{. .challenge}
+
 Next, there are **strings** and **characters**. While strings are printed specially by GAP, a string is really just a list of characters, and any function which takes a list will also take a string.
 
 ~~~
