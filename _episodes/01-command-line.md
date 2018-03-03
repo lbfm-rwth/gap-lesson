@@ -9,7 +9,6 @@ objectives:
 - "Using GAP help system"
 - "Basic objects and constructions in the GAP language"
 keypoints:
-- "Care about names of variables and functions."
 - "Use command line editing."
 - "Use autocompletion instead of typing names of functions and variables in full."
 - "Use `?` and `??` to view help pages."
@@ -359,6 +358,8 @@ open two copies of GAP, one for reading documentation and one for writing code!
 > ## The Help System
 >
 > * Use `?` and `??` to view help pages.
+>
+> * After this workshop, you can read the `A First Session with GAP` section in the GAP Tutorial.
 >
 > * You can view the documentation in the terminal, [online](https://www.gap-system.org/Doc/manuals.html), or download it as
 >   a [pdf file](https://www.gap-system.org/Doc/manuals.html).
