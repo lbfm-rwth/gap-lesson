@@ -67,7 +67,11 @@ will be written to the log file.
 The log file records all interaction with GAP happening after the call of `LogTo` but nothing that happened
 before the function call.
 
-Now we know two ways of creating testing files: Copying the relevant lines out of your shell into a document or 
+~~~
+Beispiel machen!
+~~~
+
+Now we know two ways of creating test files: Copying the relevant lines out of your shell into a document or 
 saving the session with `LogTo`. Let us have a closer look at testing files.
 
 GAP test files are just text files but it is common practice to name them with the extension `.tst`. Now create the file `avgord.tst` (for simplicity in the current directory) with the following content:
@@ -250,3 +254,8 @@ true
 
 Thus, the approach "Make it right, then make it fast" helps to detect bugs
 immediately after they have been introduced.
+
+~~~
+TODO: Exercises
+TODO: Keypoints anpassen
+~~~

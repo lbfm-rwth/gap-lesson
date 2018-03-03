@@ -15,22 +15,45 @@ keypoints:
 - "GAP is not a magic tool: theoretical knowledge may help much more than brute-force approach."
 ---
 
-In this section, we are interested in discovering some non-trivial groups
-having the property that the average order of their elements is an integer.
+In this section we are interested in finding some non-trivial groups whose average order of 
+elements is an integer.
 
-GAP distribution includes a number of data libraries (see an overview
-[here](http://www.gap-system.org/Datalib/datalib.html)). One of them is
-the [Small Groups Library](http://www.gap-system.org/Packages/sgl.html) by
-Hans Ulrich Besche, Bettina Eick and Eamonn O'Brien.
+The GAP distribution includes a number of data libraries. An overview of these 
+libraries can be found [here](http://www.gap-system.org/Datalib/datalib.html)).
+One of them is the [Small Groups Library](http://www.gap-system.org/Packages/sgl.html) by
+Hans Ulrich Besche, Bettina Eick and Eamonn O'Brien which we want to use in this chapter. First,
+we have a look at how to work with the Small Groups Library before using it to methodically search for groups with the
+property that the average order of its elements is an integer.
 
-This library provides various utilities to determine which information
-is stored there and submit queries to search for groups with desired
-properties. The key functions are `SmallGroup`, `AllSmallGroups`,
-`NrSmallGroups`, `SmallGroupsInformation` and `IdGroup`. For example:
+This library contains all groups of a certain 'small' order, i.e. order less than a certain bound
+and orders whose prime factorisation is small in some sense.
+
+Let us have a look at some key functions. To call a group of order `n` out of the Small Groups Library,
+you also need to know its indentifying number. For example
 
 ~~~
-gap> NrSmallGroups(64);
+gap> H := SmallGroup(64,1)
+~~~
+{: .source}
+
+~~~
+<pc group of size 64 with 6 generators>
+~~~
+{: .output}
+calls the first group of order 64 out of the Small Group Library.
+
+~~~
+gap> NrSmallGroups(64)
+~~~
+{: .source}
+
+~~~
 267
+~~~
+{: .output}
+
+shows, that there are 267 groups of order 64. Here a few other key functions of the package:
+~~~
 gap> SmallGroupsInformation(64);
 
   There are 267 groups of order 64.
@@ -57,8 +80,24 @@ gap> AllSmallGroups(Size,64,NilpotencyClassOfGroup,5);
   <pc group of size 64 with 6 generators> ]
 gap> List(last,IdGroup);
 [ [ 64, 52 ], [ 64, 53 ], [ 64, 54 ] ]
+gap> AllSmallGroups(64, IsAbelian); 
+[ <pc group of size 64 with 6 generators>, <pc group of size 64 with 6 generators>, <pc group of size 64 with 6 generators>, 
+  <pc group of size 64 with 6 generators>, <pc group of size 64 with 6 generators>, <pc group of size 64 with 6 generators>, 
+  <pc group of size 64 with 6 generators>, <pc group of size 64 with 6 generators>, <pc group of size 64 with 6 generators>, 
+  <pc group of size 64 with 6 generators>, <pc group of size 64 with 6 generators> ]
+gap> Size(last);
+11
+gap> AllSmallGroups(64, IsSolubleGroup);;
+gap> Size(last);
+267
 ~~~
 {: .output}
+
+`SmallGroupsInformation` gives us basic informations about the small groups of a given size as well as precomputed
+information about these groups.
+The fuction `AllSmallGroups` returns all small groups with a given size provided as the argument. However, it is possible
+to use a filter to search for small groups of a given size with additional properies such as abelian groups, 
+groups with given nilpotency class, cyclic groups and soluble groups.
 
 We would like to use our own testing function, which we will create here,
 using inline notation (available for one-argument functions):
