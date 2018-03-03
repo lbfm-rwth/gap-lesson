@@ -609,12 +609,64 @@ Sum( List( elts, Order ) ) / Length( elts );
 
 Note that `Sum` takes a list as its argument and returns the sum of its entries.
 
-> ## TODO: functional programming
->
-> * explain functional (no side-effects) vs with-side-effects
-> * convention: side effects are verbs, no side-effects are nouns
-> * can be very elegant but also very unreadable. Choose wisely!
+Using `List` to create a copy instead of changing the given list is called a
+_functional programming_ style.
+Functional programming refers to the idea that the result of a function
+_only_ depends on the values of its arguments and does not change _any_ variables
+but returns a new object.
 
+> ## Functional programming
+>
+> * functions do not have side-effects
+> * the `map` command is an analogue to GAP's `List` in other languages
+> * can be very elegant but also quickly becomes unreadable. Choose wisely!
+{: .callout}
+
+Note that for many list operations there are both functions that create a new list and
+functions that change its first input list.
+E.g.
+
+~~~
+L := [2, 4, 3];;
+Concatenation(L, [7, 8, 9]);
+L;
+~~~
+{: .source}
+
+~~~
+[ 2, 4, 3, 7, 8, 9 ]
+[ 2, 4, 3 ]
+~~~
+{: .output}
+
+~~~
+Append(L, [7, 8, 9]);
+L;
+~~~
+{: .source}
+
+~~~
+[ 2, 4, 3, 7, 8, 9 ]
+~~~
+{: .output}
+
+> ## Functional programming in GAP
+>
+> Convention:
+> * names of functions with side effects are verbs
+>
+> * names of functions without side effects are nouns
+{: .callout}
+
+> ## The `->` constructor
+>
+> * Does the `->` constructor for functions fit into the functional programming
+>   paradigm?
+>
+> > ## Solution:
+> > Yes. E.g. the function `f := x -> x^3` does not change its input.
+> {: .solution}
+{: .challenge}
 
 Let's consider another tool to manipulate lists. Often we need to get all elements
 from a list that satisfy a certain condition. For example we might need a list
