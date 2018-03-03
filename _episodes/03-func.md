@@ -12,7 +12,7 @@ keypoints:
 - "Command line is good for prototyping; functions are good for repeated calculations."
 - "Informative function names and comments will make code more readable to your future self and to others."
 - "Beware of undeclared local variables!"
-- "The break loop can be extremely helpful for debugging.
+- "The break loop can be extremely helpful for debugging."
 ---
 
 Just to remind our task: for a finite group _G_, we would like to calculate
