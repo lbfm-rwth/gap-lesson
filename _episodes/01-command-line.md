@@ -9,13 +9,14 @@ objectives:
 - "Using GAP help system"
 - "Basic objects and constructions in the GAP language"
 keypoints:
-- "Do not panic seeing 'Error, Variable: 'FuncName' must have a value'."
 - "Care about names of variables and functions."
 - "Use command line editing."
 - "Use autocompletion instead of typing names of functions and variables in full."
 - "Use `?` and `??` to view help pages."
-- "If a calculation takes too long, press `<Ctrl>-C` to interrupt it."
+- "Premature optimization is the root of all evil."
+- "Premature optimization is the root of all evil."
 - "Permutations are multiplied from left to right."
+- "If a calculation takes too long, press `<Ctrl>-C` to interrupt it."
 ---
 
 If GAP is installed correctly you should be able to start it. Exactly how
@@ -671,7 +672,7 @@ L;
 > Convention:
 > * Names of functions with side effects are verbs.
 >
-> * Names of functions without side effects are nouns.
+> * Names of functions without side effects are nouns or adjectives.
 {: .callout}
 
 > ## The `->` constructor
@@ -772,10 +773,10 @@ false
 >
 > Use list operations to solve the following:
 >
-> * Select from `elts` the elements that stabilise the point 2.
-> * Select from `elts` the elements that centralise the permutation (1,2).
-> * Find the number of elements in `elts` of order 3.
-> * Does `G` contain an element of order 5?
+> * Select from `elts` the elements that stabilise the point `2`.
+> * Select from `elts` the elements that centralise the permutation `(1,2)`.
+> * Find the number of elements in `elts` of order `3`.
+> * Does `G` contain an element of order `5`?
 >
 > > ## Solutions:
 > > * `Filtered( elts, g -> 2^g = 2 );`
