@@ -447,7 +447,7 @@ end;
 Let this run:
 
 ~~~
-AvgOrdOfGroup(M11);
+AvgOrdOfGroup(MathieuGroup(11));
 ~~~
 {: .source}
 
