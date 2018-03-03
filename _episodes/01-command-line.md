@@ -14,11 +14,11 @@ keypoints:
 - "Use command line editing."
 - "Use autocompletion instead of typing names of functions and variables in full."
 - "Use `?` and `??` to view help pages."
-- "Use `LogTo` function to save all GAP input and output into a text file."
-- "If calculation takes too long, press <Control>-C to interrupt it."
+- "If a calculation takes too long, press `<Ctrl>-C` to interrupt it."
+- "Permutations are multiplied from left to right."
 ---
 
-If GAP is installed correctly you should be able to start it. Exactly how 
+If GAP is installed correctly you should be able to start it. Exactly how
 you start GAP will depend on your operating system and how you installed
 GAP. GAP starts with the banner displaying information about the version of
 the system and loaded components, and then displays the command line prompt
@@ -43,8 +43,12 @@ gap>
 {: .output}
 
 To leave GAP, type `quit;` at the GAP prompt. Remember that all GAP commands,
-including this one, must be finished with a semicolon! Practice entering
-`quit;` to leave GAP, and then starting a new GAP session.
+including this one, must be finished with a semicolon!
+
+~~~
+Practice entering `quit;` to leave GAP, and then start a new GAP session.
+~~~
+{: .challenge}
 
 The easiest way to start trying GAP out is as a calculator:
 
@@ -59,9 +63,9 @@ The easiest way to start trying GAP out is as a calculator:
 {: .output}
 
 We can repeat our calculation from above
-if we want to record it as well. Instead of retyping it, we will use Up and Down
+if we want to record it as well. Instead of retyping it, we will use `<Up>` and `<Down>`
 arrow keys to scroll the *command line history*. Repeat this until you will see
-the formula again, then press Return (the location of the cursor in the command
+the formula again, then press `<Return>` (the location of the cursor in the command
 line does not matter):
 
 ~~~
@@ -75,10 +79,10 @@ line does not matter):
 {: .output}
 
 You can also edit existing commands. Press up once more, and then use
-Left and Right arrow keys, Delete or Backspace to edit it and replace
-32 by 64 (another useful shortcuts are
+`<Left>` and `<Right>` arrow keys, `<Delete>` or `<Backspace>` to edit it and replace
+32 by 64 (other useful shortcuts are
 Ctrl-A and Ctrl-E to move the cursor to the beginning or to the end of the
-line, respectively). Now press the Return key (at any position of the
+line, respectively). Now press the `<Return>` key (at any position of the
 cursor in the command line):
 
 ~~~
@@ -91,23 +95,29 @@ cursor in the command line):
 ~~~
 {: .output}
 
-It is useful to know that if the command line history is long, one could
-perform a partial search by typing the initial part of the command and using
-Up and Down arrow keys after that, to scroll only the lines that begin with
-the same string.
+~~~
+Enter any command into your command line and press `<Enter>`.
+Press `<Up>` to repeat the command and modify it.
+~~~
+{: .challenge}
+
+It is useful to know that if the command line history is long, one can
+perform a partial search by typing the initial part of the command and use
+`<Up>` and `<Down>` arrow keys after that, to scroll only the lines that begin with
+the given string.
 
 If you want to store a value for later use, you can assign it to a name
-using ` := ` 
+using ` := `:
 
 ~~~
 universe  :=  6*7;
 ~~~
 {: .source}
 
-> ## ` := `, `=` and `<>`
+> ## `:=`, `=` and `<>`
 >
 > * In other languages you might be more familiar with using `=` to assign
->   variables, but GAP uses ` := `.
+>   variables, but GAP uses `:=`.
 >
 > * GAP uses `=` to compare if two things are the same where other languages might
 >   use `==`.
@@ -131,7 +141,7 @@ could be typed without spaces:
 {: .output}
 
 Whitespace symbols are often used to format more complicated commands for
-better readability. For example, the following input which creates a 3x3 matrix
+better readability. For example, the following input creates a 3x3 matrix
 
 ~~~
 m := [[1,2,3],[4,5,6],[7,8,9]];
@@ -176,14 +186,18 @@ Display(m);
 In general GAP functions like `Display` are called using brackets
 which contain a (possibly empty) list of arguments.
 
-> ## Functions are also GAP objects
+> ## `Display;`
 >
 > Check what happens if you forget to add brackets,
 > e.g. type `Display;` and `Factorial;`
-> We will explain the differences in these outputs later.
-{: .callout}
+> > ## Solution:
+> > GAP tells us that `Display` is an operation and `Factorial` is a function.
+> > These are GAP objects just the same as are lists and matrices.
+> > We will explain the difference between operations and functions later.
+> {: .solution}
+{: .challenge}
 
-Here there are examples of calling some other GAP functions:
+Here are examples of some other GAP functions:
 
 ~~~
 Factorial(100);
@@ -225,7 +239,7 @@ Functions may be combined in various ways, and may be
 used as arguments of other functions, as we will see later.
 They can be defined very compactly using the arrow notation:
 ~~~
-f := x->2*x+18;;
+f := x -> 2*x + 18;;
 f(3);
 ~~~
 {: .source}
@@ -237,9 +251,9 @@ f(3);
 
 Note that the `;;` suppresses the output of an expression.
 
-A very time-saving feature of the GAP command-line interfaces is completion
-of identifiers when the Tab key is pressed. For example, type `Fib` and then
-press the Tab key to complete the input to `Fibonacci`:
+A very time-saving feature of the GAP command-line interface is completion
+of identifiers when the `<Tab>` key is pressed. For example, type `Fib` and then
+press the `<Tab>` key to complete the input to `Fibonacci`:
 
 ~~~
 Fibonacci(100);
@@ -251,14 +265,22 @@ Fibonacci(100);
 ~~~
 {: .output}
 
-In case when the unique completion is not possible, GAP will try to perform
-partial completion, and pressing the Tab key second time will display all possible
+In case when there is no unique completion, GAP will perform a
+partial completion, and pressing the `<Tab>` key a second time will display all possible
 completions of the identifier. Try, for example, to enter `GroupHomomorphismByImages`
 or `NaturalHomomorphismByNormalSubgroup` using completion.
 
+> ## Always use Tab completion
+>
+> * it will save you time
+>
+> * you will notice immediately whether you misspelled a name
+>
+{: .callout}
+
 The way functions are named in GAP will hopefully help you to memorize or even guess names
 of library functions. If a variable name consists of several words then the
-first letter of each word is capitalized (remember that GAP is case-sensitive!).
+first letter of each word is capitalized.
 Further details on naming conventions used in GAP are documented in the GAP
 manual [here](http://www.gap-system.org/Manuals/doc/ref/chap5.html#X81F732457F7BC851).
 Functions with names which are `ALL_CAPITAL_LETTERS` are internal functions not intended
@@ -281,8 +303,8 @@ not in any function at line 14 of *stdin*
 because the name of the GAP library function is `Factorial`. Using lowercase
 instead of uppercase or vice versa also affects name completion.
 
-Now let's consider the following problem: for a finite group _G_, calculate the
-average order of its element (that is, the sum of orders of its elements divided
+Now let's consider the following problem: For a finite group _G_, calculate the
+average order of its elements (that is, the sum of orders of its elements divided
 by the order of the group). Where to start?
 
 Enter `?Group`, and you will see all help entries, starting with `Group`:
@@ -316,11 +338,11 @@ Enter `?Group`, and you will see all help entries, starting with `Group`:
 {: .output}
 
 You may use arrow keys to move up and down the list, and open help pages by
-pressing the Return key. For this exercise, open `Tutorial: Groups and Homomorphisms`
-first. Note navigation instructions at the bottom of the screen. Look at
+pressing the `<Return>` key. For this exercise, open `Tutorial: Groups and Homomorphisms`
+first. Note the navigation instructions at the bottom of the screen. Look at the
 first two pages, then press `q` to return to the selection menu. Next, navigate to
 `Reference: Groups` and open it. Within the two first pages you will find the
-function `Group` and mentioning of `Order`.
+function `Group` and a mentioning of `Order`.
 
 
 Let's now copy the following input from the first example of the GAP Reference
@@ -335,14 +357,14 @@ This guide shows how permutations in GAP are written in cycle notation, and also
 shows common functions which are used with groups.
 
 ~~~
-a := (1,2,3);;b := (2,3,4);;
+a := (1,2,3);; b := (2,3,4);;
 ~~~
 {: .source}
 
 Next, let `G` be a group generated by `a` and `b`:
 
 ~~~
-G := Group(a,b);
+G := Group(a, b);
 ~~~
 {: .source}
 
@@ -366,7 +388,8 @@ false
 ~~~
 {: .output}
 
-Our next task is to find out how to obtain a list of element and their orders.
+Our next task is to find out how to obtain a list of elements and their orders.
+
 ~~~
 Enter `?elements` and explore the list of help topics.
 ~~~
@@ -374,7 +397,7 @@ Enter `?elements` and explore the list of help topics.
 
 After its inspection,
 the entry from the Tutorial does not seem relevant, but the entry from the
-Reference manual is. It also tells the difference between using `AsSSortedList`
+Reference manual is. It also tells us the difference between using `AsSSortedList`
 and `AsList`. So, this is the list of elements of `G`:
 
 ~~~
@@ -389,7 +412,7 @@ AsList(G);
 {: .output}
 
 The returned object is a _list_. We would like to assign it to a variable
-to explore and reuse. We forgot to do it when we were calculating it. Of
+in order to explore and reuse it. We forgot to do this when we calculated it. Of
 course, we may use the command line history to restore the last command, edit
 it and call again. But instead, we will use `last` which is a special variable
 holding the last result returned by GAP:
@@ -420,9 +443,6 @@ gap> elts[1]; elts[3]; Length(elts);
 ~~~
 {: .output}
 
-TODO:
-- add more operations for lists: Append, Concatenation
-
 We can access elements of lists and we can also dynamically change the length of a list by adding new elements:
 
 ~~~
@@ -430,14 +450,17 @@ L := [3,4];;
 L;
 L[1] := 2;;
 L;
-Add(L, 3];;
+Add(L, 3);;
+L;
+Append(L, [7, 8, 9]);;
 L;
 ~~~
 {: .source}
 ~~~
-[3,4]
-[2,4]
-[2,4,3]
+[ 3, 4 ]
+[ 2, 4 ]
+[ 2, 4, 3 ]
+[ 2, 4, 3, 7, 8, 9 ]
 ~~~
 {: .output}
 
@@ -465,7 +488,6 @@ need not be of the same type:
 > * May dynamically change their length (with `Add`, `Append` or direct assigment)
 >
 > * Not required to contain objects of the same type
->
 >
 > * See more in [GAP Tutorial: Lists and Records](http://www.gap-system.org/Manuals/doc/tut/chap3.html)
 {: .callout}
@@ -508,7 +530,7 @@ s := 0;;
 for g in elts do
   s  :=  s + Order(g);
 od;
-s/Length(elts);
+s / Length(elts);
 ~~~
 {: .source}
 
@@ -526,7 +548,7 @@ s := 0;;
 for g in G do
   s  :=  s + Order(g);
 od;
-s/Size(G);
+s / Size(G);
 ~~~
 {: .source}
 
@@ -536,14 +558,14 @@ s/Size(G);
 {: .output}
 
 There are other ways of looping, for example we can instead loop over the integers,
-and accept `elts` like an array:
+and use `elts` like an array:
 
 ~~~
 s := 0;;
 for i in [ 1 .. Length(elts) ] do
   s  :=  s + Order( elts[i] );
 od;
-s/Length(elts);
+s / Length(elts);
 ~~~
 {: .source}
 
@@ -553,21 +575,27 @@ s/Length(elts);
 {: .output}
 
 We can state this in a much more compact way as we will now see:
-GAP has very helpful list manipulation tools. 
+GAP has very helpful list manipulation tools.
 Here we use the fact that functions are objects in GAP and so they
-can also be an argument of a function. 
-`List(L,F)` makes a new list where the function `F` is applied to each
-   member of the list `L`.
+can also be an argument of a function.
+`List(L, F)` returns a newly created list where the function `F` is applied to each
+member of the list `L`.
+
 ~~~
 f := x->2*x+18;;
-List([1..5], f); 
+l := [1..5];;
+List(l, f);
+l;
 ~~~
 {: .source}
+
 ~~~
-[ 20, 22, 24, 26, 28 ];
+[ 20, 22, 24, 26, 28 ]
+[ 1 .. 5 ]
 ~~~
 {: .output}
 
+Note that this does not change `l`.
 We now use this to state our computation concisely:
 ~~~
 Sum( List( elts, Order ) ) / Length( elts );
@@ -588,10 +616,12 @@ Note that `Sum` takes a list as its argument and returns the sum of its entries.
 > * can be very elegant but also very unreadable. Choose wisely!
 
 
-Let's consider another tool to manipulate list. Often we need to get all elements
+Let's consider another tool to manipulate lists. Often we need to get all elements
 from a list that satisfy a certain condition. For example we might need a list
-containing all even numbers between 1 and 20. This is done by the commmand `Filtered`, 
-where `Filtered(L, F)` is the list containing all elements `l` of `L` for which `F(l)=true`.
+containing all even numbers between 1 and 20. This is done by the commmand `Filtered`,
+where `Filtered(L, F)` is the list containing all elements `l` of `L` for which `F(l)`
+is true.
+
 ~~~
 Filtered([1..20], IsEvenInt]);
 ~~~
@@ -602,9 +632,7 @@ Filtered([1..20], IsEvenInt]);
 ~~~
 {: .output}
 
-We study some more methods to get information from lists. The function 
-`NrMovedPoints` gives the number of moved points of a permutation.
- 
+We study some more methods to get information from lists.
 
 * finding elements of `G` having no fixed points:
 
@@ -630,8 +658,7 @@ First( elts, g -> (1,2)^g = (2,3) );
 ~~~
 {: .output}
 
-TODO: Make callout and key point
-Let's check this (remember that in GAP permutations are multiplied from left to right!):
+Let's check this:
 
 ~~~
 (1,2,3)^-1*(1,2)*(1,2,3)=(2,3);
@@ -642,6 +669,11 @@ Let's check this (remember that in GAP permutations are multiplied from left to 
 true
 ~~~
 {: .output}
+
+> ## From left to right
+>
+> * In GAP permutations are applied from the right and thus multiplied from left to right!
+{: .callout}
 
 Finally, there are the functions `ForAll` and `ForAny` that work just like the quantifiers of the same name:
 * checking whether all non-identity elements of `G` move at least 2 points:
@@ -669,15 +701,15 @@ false
 {: .output}
 
 > ## List operations
-> 
+>
 > Use list operations to solve the following:
 >
 > * Select from `elts` the elements that stabilise the point 2.
 > * Select from `elts` the elements that centralise the permutation (1,2).
 > * Find the number of elements in `elts` of order 3.
 > * Does `G` contain an element of order 5?
-> 
-> > ## Solutions: 
+>
+> > ## Solutions:
 > > * `Filtered( elts, g -> 2^g = 2 );`
 > > * `Filtered( elts, g -> (1,2)^g = (1,2) );`
 > > * `Length(Filtered(elts, g-> Order(g)=3));`
