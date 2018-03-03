@@ -266,8 +266,12 @@ Fibonacci(100);
 
 In case when there is no unique completion, GAP will perform a
 partial completion, and pressing the `<Tab>` key a second time will display all possible
-completions of the identifier. Try, for example, to enter `GroupHomomorphismByImages`
-or `NaturalHomomorphismByNormalSubgroup` using completion.
+completions of the identifier.
+
+> ## Tab completion
+> Try to enter `GroupHomomorphismByImages` or
+> `NaturalHomomorphismByNormalSubgroup` using completion.
+{: .challenge}
 
 > ## Always use Tab completion
 >
@@ -621,6 +625,8 @@ Functional programming refers to the idea that the result of a function
 _only_ depends on the values of its arguments and does not change _any_ variables
 but returns a new object.
 This makes programs much more safe to use and to understand.
+When writing new code you should always prefer elegance and understandability to
+performance.
 To say it with Donald Knuth:
 > ## Premature optimization is the root of all evil
 >
