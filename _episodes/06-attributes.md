@@ -44,16 +44,18 @@ AvgOrdOfCollection(A); time; AvgOrdOfCollection(A); time;
 ~~~
 {: .output}
 
-In the last example, the group in question was the same - we haven't
-constructed another copy of `AlternatingGroup(10)`; however, the result
-of the calculation was not stored in `A`.
+As you can see, we only called `AlternatingGroup(10)` once but GAP apparently
+did not store the result in `A` and did all the work again when we called 
+` AvgOrdOfCollection(A)` the second time.
 
-If you need to reuse this value, one option could be to store it in some
-variable, but then you should be careful about matching such variables
-with corresponding groups, and the code could become quite convoluted
-and unreadable. On the other hand, GAP has a notion of attributes which
-are used to accumulate information that objects learn about themselves
-during their lifetime. Consider the following example:
+If you need to reuse this value, one option is to store it in some
+variable, but then you must be careful about matching such variables
+with corresponding groups and the code could become quite convoluted
+and unreadable.
+
+Luckily GAP provides a good solution to the above problem: Attributes of objects. 
+These are used to accumulate information that objects learn about themselves during their lifetime.
+Let us have a look at a first example:
 
 ~~~
 G:=Group([ (1,2,3,4,5,6,7,8,9,10,11), (3,7,11,8)(4,10,5,6) ]);
@@ -84,11 +86,55 @@ NrConjugacyClasses;
 ~~~
 {: .output}
 
-Our goal is now to learn how to create own attributes.
+To see which attributes are known of a given object, GAP provides the function
+`KnownAttributesOfObject`. Let us have a look at the following example.
+
+~~~
+gap> G:=Group([ (1,2,3,4,5,6,7,8,9,10,11), (3,7,11,8)(4,10,5,6) ]);
+Group([ (1,2,3,4,5,6,7,8,9,10,11), (3,7,11,8)(4,10,5,6) ])
+gap> KnownAttributesOfObject(G);
+[ "LargestMovedPoint", "GeneratorsOfMagmaWithInverses", "MultiplicativeNeutralElement" ]
+~~~
+{: .source}
+Know let us compute the number of conjugacy classes of `G` again and have a look at the known attributes
+of `G`:
+
+~~~
+gap> NrConjugacyClasses(G);
+10
+gap> KnownAttributesOfObject(G);
+[ "Size", "PseudoRandomSeed", "OneImmutable", "SmallestMovedPoint", "LargestMovedPoint", "NrMovedPoints", "MovedPoints", 
+  "GeneratorsOfMagmaWithInverses", "TrivialSubmagmaWithOne", "MultiplicativeNeutralElement", "ConjugacyClasses", "PerfectResiduum", 
+  "DerivedSeriesOfGroup", "DerivedSubgroup", "NrConjugacyClasses", "IsomorphismTypeInfoFiniteSimpleGroup", "BlocksAttr", 
+  "StabChainMutable", "StabChainOptions", "DataAboutSimpleGroup" ]
+~~~
+{: .source}
+
+Just after creating the group `G`, GAP only knows a few basic attributes of `G`, not even its size.
+Computing the number of conjugacy classes involves computing a few informations about `G`. For example the 
+conjugacy classes of `G` as well as its derived subgrooup are known:
+
+~~~
+gap> ConjugacyClasses(G);
+[ ()^G, (1,3)(2,11)(4,6)(7,8)^G, (1,11,3,2)(4,8,6,7)^G, (1,7,11,4,3,8,2,6)(5,10)^G, (1,6,2,8,3,4,11,7)(5,10)^G, 
+  (1,8,5,2,7)(3,11,10,9,4)^G, (1,2,7)(3,8,11)(4,6,9)^G, (1,9,2,4,7,6)(3,11,8)(5,10)^G, (1,6,5,10,4,11,2,3,7,8,9)^G, 
+  (1,9,8,7,3,2,11,4,10,5,6)^G ]
+gap> time;
+1
+gap> DerivedSubgroup(G);
+Group([ (1,9,4,7,3)(5,10,8,6,11), (1,9,10,11,7)(3,4,8,6,5), (1,3,2,5,8)(4,10,6,9,11) ])
+gap> time;
+0
+~~~
+{: .source}
+
+This shows us that GAP stores a lot of results produced during a computation in `G`. However, as
+seen earlier, the result of `AvgOrderOfCollection` is not stored in the group we apply the function to.
+Thus, we now want to focuss on how to create our own attributes and how to use them.
 
 Since we already have a function `AvgOrdOfCollection` which
 does the calculation, the simplest example of turning it into
-an attribute could look as follows:
+an attribute could look like this:
 
 ~~~
 AverageOrder := NewAttribute("AverageOrder", IsCollection);
@@ -96,14 +142,14 @@ InstallMethod( AverageOrder, "for a collection", [IsCollection], AvgOrdOfCollect
 ~~~
 {: .source}
 
-In this example, first we declared an attribute `AverageOrder` for
+In this example we first declared an attribute `AverageOrder` for
 objects in the category `IsCollection`, and then installed the function
 `AvgOrdOfCollection` as a method for this attribute. Instead of calling
-the function `AvgOrdOfCollection`, we may now call `AverageOrder`.
+the function `AvgOrdOfCollection` we may now call `AverageOrder`.
 
-Now we may check that subsequent calls of `AverageOrder` with the same argument
-are performed at zero cost. In this example the time is reduced from more than
-16 seconds to zero:
+Let us see if defining this new attribute and installing a method for this attribute
+has the desired effect: Calling `AvgOrder` for a second time on the same collection
+comes at zero cost:
 
 ~~~
 S:=SymmetricGroup(10);; AverageOrder(S); time; AverageOrder(S); time;
