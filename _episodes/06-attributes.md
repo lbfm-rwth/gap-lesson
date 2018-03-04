@@ -112,7 +112,7 @@ gap> KnownAttributesOfObject(G);
 
 Just after creating the group `G`, GAP only knows a few basic attributes of `G`, not even its size.
 Computing the number of conjugacy classes involves computing a few informations about `G`. For example the 
-conjugacy classes of `G` as well as its derived subgrooup are known:
+conjugacy classes of `G` as well as its derived subgroup are known:
 
 ~~~
 gap> ConjugacyClasses(G);
@@ -152,17 +152,23 @@ has the desired effect: Calling `AvgOrder` for a second time on the same collect
 comes at zero cost:
 
 ~~~
-S:=SymmetricGroup(10);; AverageOrder(S); time; AverageOrder(S); time;
+S:=SymmetricGroup(10);; KnownAttributesOfObject(S); AverageOrder(S); time; KnownAttributesOfObject(S); AverageOrder(S); time;
 ~~~
 {: .source}
 
 ~~~
+[ "Size", "NrMovedPoints", "MovedPoints", "GeneratorsOfMagmaWithInverses", "MultiplicativeNeutralElement" ]
 39020911/3628800
 16445
+[ "Size", "NrMovedPoints", "MovedPoints", "GeneratorsOfMagmaWithInverses", "MultiplicativeNeutralElement", "StabChainMutable", 
+  "StabChainImmutable", "AverageOrder" ]
 39020911/3628800
 0
 ~~~
 {: .output}
+
+So indeed, the cost for the second call of our function is zero and GAP stores our newly defined 
+attribute in `S`.
 
 You may be interested why we have declared the operation for a collection and
 not only for a group and then used the non-efficient method for a group again,
