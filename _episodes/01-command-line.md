@@ -585,6 +585,10 @@ s / Length(elts);
 ~~~
 {: .output}
 
+> ## Loops in GAP
+> You can `for` loop over many objects, not only ranges like `[1 .. n]`.
+{: .callout}
+
 We can state this in a much more compact way as we will now see:
 GAP has very helpful list manipulation tools.
 Here we use the fact that functions are objects in GAP and so they
