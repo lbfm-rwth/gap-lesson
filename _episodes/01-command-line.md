@@ -12,10 +12,10 @@ keypoints:
 - "Use command line editing."
 - "Use autocompletion instead of typing names of functions and variables in full."
 - "Use `?` and `??` to view help pages."
-- "Premature optimization is the root of all evil."
-- "Premature optimization is the root of all evil."
+- "Premature optimization is the root of all evil!"
+- "Premature optimization is the root of all evil!!"
+- "Functional programming can make code not only concise but also unreadable if nested too much."
 - "Permutations are multiplied from left to right."
-- "If a calculation takes too long, press `<Ctrl>-C` to interrupt it."
 ---
 
 If GAP is installed correctly you should be able to start it. Exactly how
