@@ -535,7 +535,7 @@ gap> res;
 {: .output}
 
 > ## Does the Small Groups Library contain another group with this property?
-
+> 
 > * Create proper exercises.
 >
 > * What can you say about the order of the groups with this property?
