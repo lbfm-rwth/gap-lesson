@@ -149,7 +149,7 @@ the function `AvgOrdOfCollection` we may now call `AverageOrder`.
 
 Let us see if defining this new attribute and installing a method for this attribute
 has the desired effect: Calling `AvgOrder` for a second time on the same collection
-comes at zero cost:
+comes at zero cost and the result is stored in `S`:
 
 ~~~
 S:=SymmetricGroup(10);; KnownAttributesOfObject(S); AverageOrder(S); time; KnownAttributesOfObject(S); AverageOrder(S); time;
@@ -168,33 +168,31 @@ S:=SymmetricGroup(10);; KnownAttributesOfObject(S); AverageOrder(S); time; Known
 {: .output}
 
 So indeed, the cost for the second call of our function is zero and GAP stores our newly defined 
-attribute in `S`.
-
-You may be interested why we have declared the operation for a collection and
-not only for a group and then used the non-efficient method for a group again,
-while we have already developed an efficient one?
-
-Imagine the situation when you would like to be able to compute an average order
-both for a group and for a list which consists of objects having a multiplicative
-order. You may have a special function for each case, as we have already. If it
-could happen that you don't know in advance the type of the object in question,
-you may add checks into the code and dispatch to a suitable function. This could
-quickly became complicated if you have several different functions for various
-types of objects. Instead of that, attributes are bunches of functions, called
-_methods_, and the _method selection_ will choose the most efficient method
-based on the type of all arguments.
-
-To illustrate this, we will now install a method for `AverageOrder` for a group:
+attribute in `S`. We told GAP that `AverageOrder` is applicable to collections in general, so the input need not be a group:
 
 ~~~
-InstallMethod( AverageOrder, [IsGroup], AvgOrdOfGroup);
+gap> A := [ (1,2,3),(2,3,4,5,6),(9,10)];
+[ (1,2,3), (2,3,4,5,6), (9,10) ]
+gap> IsGroup(A); IsCollection(A);
+false
+true
+gap> AverageOrder(A);
+10/3
 ~~~
 {: .source}
 
-If you will apply it to the group which already has `AverageOrder`, nothing
-will happen, since GAP will use the stored value. For a newly created group,
-this new method will be called indeed:
+So far we have only implemented our `AvgOrdOfCollection` function and not its improved version for groups.
+As groups are collections as well, GAP applies the method `AvgOrder` to groups, using
+`AvgOrdOfCollection`, as seen above.
 
+We would like to install `AvgOrdOfGroup` as a method for groups as well"
+
+~~~
+InstallMethod( AverageOrder, "for a group", [IsGroup], AvgOrdOfGroup);
+~~~
+{: .source}
+
+For a newly created group, GAP will use `AvgOrdOfGroup` when `AverageOrder` is called:
 ~~~
 S:=SymmetricGroup(10);; AverageOrder(S); time; AverageOrder(S); time;
 ~~~
