@@ -9,12 +9,12 @@ objectives:
 - "Using GAP help system"
 - "Basic objects and constructions in the GAP language"
 keypoints:
-- "Do not panic seeing 'Error, Variable: 'FuncName' must have a value'."
-- "Care about names of variables and functions."
 - "Use command line editing."
 - "Use autocompletion instead of typing names of functions and variables in full."
 - "Use `?` and `??` to view help pages."
-- "If a calculation takes too long, press `<Ctrl>-C` to interrupt it."
+- "Premature optimization is the root of all evil!"
+- "Premature optimization is the root of all evil!!"
+- "Functional programming can make code not only concise but also unreadable if nested too much."
 - "Permutations are multiplied from left to right."
 ---
 
@@ -52,7 +52,7 @@ including this one, must be finished with a semicolon!
 The easiest way to start trying GAP out is as a calculator:
 
 ~~~
-( 1 + 2^32 ) / (1 - 2*3*107 );
+(1 + 2^32) / (1 - 2*3*107);
 ~~~
 {: .source}
 
@@ -68,7 +68,7 @@ the formula again, then press `<Return>` (the location of the cursor in the comm
 line does not matter):
 
 ~~~
-( 1 + 2^32 ) / (1 - 2*3*107 );
+(1 + 2^32) / (1 - 2*3*107);
 ~~~
 {: .source}
 
@@ -85,7 +85,7 @@ line, respectively). Now press the `<Return>` key (at any position of the
 cursor in the command line):
 
 ~~~
-( 1 + 2^64 ) / (1 - 2*3*107 );
+(1 + 2^64) / (1 - 2*3*107);
 ~~~
 {: .source}
 
@@ -265,8 +265,12 @@ Fibonacci(100);
 
 In case when there is no unique completion, GAP will perform a
 partial completion, and pressing the `<Tab>` key a second time will display all possible
-completions of the identifier. Try, for example, to enter `GroupHomomorphismByImages`
-or `NaturalHomomorphismByNormalSubgroup` using completion.
+completions of the identifier.
+
+> ## Tab completion
+> Try to enter `GroupHomomorphismByImages` or
+> `NaturalHomomorphismByNormalSubgroup` using completion.
+{: .challenge}
 
 > ## Always use Tab completion
 >
@@ -354,6 +358,8 @@ open two copies of GAP, one for reading documentation and one for writing code!
 > ## The Help System
 >
 > * Use `?` and `??` to view help pages.
+>
+> * After this workshop, you can read the `A First Session with GAP` section in the GAP Tutorial.
 >
 > * You can view the documentation in the terminal, [online](https://www.gap-system.org/Doc/manuals.html), or download it as
 >   a [pdf file](https://www.gap-system.org/Doc/manuals.html).
@@ -579,6 +585,10 @@ s / Length(elts);
 ~~~
 {: .output}
 
+> ## Loops in GAP
+> You can `for` loop over many objects, not only ranges like `[1 .. n]`.
+{: .callout}
+
 We can state this in a much more compact way as we will now see:
 GAP has very helpful list manipulation tools.
 Here we use the fact that functions are objects in GAP and so they
@@ -620,12 +630,16 @@ Functional programming refers to the idea that the result of a function
 _only_ depends on the values of its arguments and does not change _any_ variables
 but returns a new object.
 This makes programs much more safe to use and to understand.
+When writing new code you should always prefer elegance and understandability to
+performance.
 To say it with Donald Knuth:
 > ## Premature optimization is the root of all evil
 >
 > >Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered.
-> >We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil.
-> >Yet we should not pass up our opportunities in that critical 3%.
+> We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil.
+> Yet we should not pass up our opportunities in that critical 3%.
+>
+> [Donald Knuth](https://en.wikiquote.org/wiki/Donald_Knuth)
 {: .callout}
 
 > ## Functional programming
@@ -637,7 +651,7 @@ To say it with Donald Knuth:
 {: .callout}
 
 Note that for many list operations there are both functions that create a new list and
-functions that change its first input list.
+functions that change its first input.
 E.g.
 
 ~~~
@@ -669,7 +683,7 @@ L;
 > Convention:
 > * Names of functions with side effects are verbs.
 >
-> * Names of functions without side effects are nouns.
+> * Names of functions without side effects are nouns or adjectives.
 {: .callout}
 
 > ## The `->` constructor
@@ -703,7 +717,7 @@ We study some more methods to get information from lists.
 * finding elements of `G` having no fixed points:
 
 ~~~
-Filtered( elts, g -> NrMovedPoints(g) = 4 );
+Filtered(elts, g -> NrMovedPoints(g) = 4);
 ~~~
 {: .source}
 
@@ -715,7 +729,7 @@ Filtered( elts, g -> NrMovedPoints(g) = 4 );
 * finding a permutation `g` that conjugates (1,2) to (2,3)
 
 ~~~
-First( elts, g -> (1,2)^g = (2,3) );
+First(elts, g -> (1,2)^g = (2,3));
 ~~~
 {: .source}
 
@@ -745,7 +759,7 @@ Finally, there are the functions `ForAll` and `ForAny` that work just like the q
 * checking whether all non-identity elements of `G` move at least 2 points:
 
 ~~~
-ForAll( elts, g -> g=() or NrMovedPoints(g)>=2 );
+ForAll(elts, g -> g=() or NrMovedPoints(g)>=2);
 ~~~
 {: .source}
 
@@ -757,7 +771,7 @@ true
 * checking whether there is an element in `G` which moves exactly two points:
 
 ~~~
-ForAny( elts, g -> NrMovedPoints(g) = 2 );
+ForAny(elts, g -> NrMovedPoints(g) = 2);
 ~~~
 {: .source}
 
@@ -770,14 +784,14 @@ false
 >
 > Use list operations to solve the following:
 >
-> * Select from `elts` the elements that stabilise the point 2.
-> * Select from `elts` the elements that centralise the permutation (1,2).
-> * Find the number of elements in `elts` of order 3.
-> * Does `G` contain an element of order 5?
+> * Select from `elts` the elements that stabilise the point `2`.
+> * Select from `elts` the elements that centralise the permutation `(1,2)`.
+> * Find the number of elements in `elts` of order `3`.
+> * Does `G` contain an element of order `5`?
 >
 > > ## Solutions:
-> > * `Filtered( elts, g -> 2^g = 2 );`
-> > * `Filtered( elts, g -> (1,2)^g = (1,2) );`
+> > * `Filtered(elts, g -> 2^g = 2);`
+> > * `Filtered(elts, g -> (1,2)^g = (1,2));`
 > > * `Length(Filtered(elts, g-> Order(g)=3));`
 > > * `ForAny(elts, g-> Order(g)=5);`
 > {: .solution}
