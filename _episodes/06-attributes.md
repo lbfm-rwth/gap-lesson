@@ -46,7 +46,7 @@ AvgOrdOfCollection(A); time; AvgOrdOfCollection(A); time;
 
 As you can see, we only called `AlternatingGroup(10)` once but GAP apparently
 did not store the result in `A` and did all the work again when we called 
-` AvgOrdOfCollection(A)` the second time.
+`AvgOrdOfCollection(A)` the second time.
 
 If you need to reuse this value, one option is to store it in some
 variable, but then you must be careful about matching such variables
@@ -96,7 +96,7 @@ gap> KnownAttributesOfObject(G);
 [ "LargestMovedPoint", "GeneratorsOfMagmaWithInverses", "MultiplicativeNeutralElement" ]
 ~~~
 {: .source}
-Know let us compute the number of conjugacy classes of `G` again and have a look at the known attributes
+Let us now compute the number of conjugacy classes of `G` again and have a look at the known attributes
 of `G`:
 
 ~~~
