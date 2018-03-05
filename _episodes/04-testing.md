@@ -8,10 +8,9 @@ objectives:
 - "Be able to create and run test files"
 - "Understand how test discrepancies and runtime regressions
  could be identified and interpreted"
-- "Understand how to adjust tests to check randomised algorithms"
 - "Learn the 'Make it right, then make it fast' concept"
 keypoints:
-- "It is easy to create a test file by copying and pasting GAP session."
+- "It is easy to create a test file by copying and pasting GAP session or use the LogTo-command."
 - "Writing a good and comprehensive test suite requires some efforts."
 - "Make it right, then make it fast!"
 ---
@@ -255,7 +254,15 @@ true
 Thus, the approach "Make it right, then make it fast" helps to detect bugs
 immediately after they have been introduced.
 
-~~~
-TODO: Exercises
-TODO: Keypoints anpassen
-~~~
+> ## Exercises
+> 
+> * TBA1 
+>
+> * TBA2 
+>
+> > ## Solution
+> > * TBA1
+> >
+> > * TBA2
+> {: .solution}
+{: .challenge}

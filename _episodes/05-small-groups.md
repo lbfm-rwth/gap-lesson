@@ -4,14 +4,16 @@ teaching: 40
 exercises: 15
 questions:
 - "Modular programming: putting functions together"
-- "How to check some conjecture for all groups of a given order?"
+- "How to check a conjecture for all groups of a given order."
 objectives:
-- "Using Small Groups Library"
-- "Designing a system of functions to fit together"
+- "Using the Small Groups Library"
+- "Designing a system of functions to fit together."
+- "Discovering the first boundaries of GAP and Brute-force approaches."
 keypoints:
 - "Organise the code into functions."
 - "Create small groups one by one instead of producing a huge list of them."
 - "Using `SmallGroupsInformation` may help to reduce the search space."
+- "Determining the isomorphism type of a group."
 - "GAP is not a magic tool: theoretical knowledge may help much more than brute-force approach."
 ---
 
@@ -533,17 +535,25 @@ gap> res;
 ~~~
 {: .output}
 
+> ## Exercises
+> 
+> * TBA1
+>
+> * TBA2
+>
+> > ## Solution
+> > * TBA1
+> >
+> > * TBA2
+> {: .solution}
+{: .challenge}
+
 > ## Does the Small Groups Library contain another group with this property?
 > 
-> * Create proper exercises.
->
 > * What can you say about the order of the groups with this property?
->
-> * Can you estimate how long it may take to check all 408641062 groups of order 1536 ?
 >
 > * How many groups of order not higher than 2000 may you be able to check,
 >   excluding _p_-groups and those of order 1536?
 >
-> * Can you find in the Small Groups Library another group (of order not equal
->   to 1536) with this property?
+> * Use the Small Group Librabry to find another group whose order is greater than 1536 and the average order of its elements is an integer.
 {: .challenge}
