@@ -185,7 +185,7 @@ So far we have only implemented our `AvgOrdOfCollection` function and not its im
 As groups are collections as well, GAP applies the method `AvgOrder` to groups, using
 `AvgOrdOfCollection`, as seen above.
 
-We would like to install `AvgOrdOfGroup` as a method for groups as well"
+We would like to install `AvgOrdOfGroup` as a method for groups as well:
 
 ~~~
 InstallMethod( AverageOrder, "for a group", [IsGroup], AvgOrdOfGroup);
@@ -206,19 +206,67 @@ S:=SymmetricGroup(10);; AverageOrder(S); time; AverageOrder(S); time;
 ~~~
 {: .output}
 
+As there usually are several methods applicable to the same object to compute
+the same information, for instance `AvgOrdOfCollection` is applicable two groups
+and collections in general, one could ask GAP for the most suitable method to performe
+the desired task. GAP provides the function `ApplicableMethod` to answer that question. 
+Here is a first example:
+
+~~~
+gap> ApplicableMethod(AverageOrder, [G],1);
+~~~
+{: .source}
+
+~~~
+#I  Searching Method for AverageOrder with 1 arguments:
+#I  Total: 3 entries
+#I  Method 2: ``AverageOrder: for a group'', value: 35
+function( G ) ... end
+~~~
+{: .output}
+
+The integer we provide as the third argument is the print level. Print level 1 means that
+GAP only shows us the highest ranked method to compute the attribute `AverageOrder`. Calling
+`ApplicableMethod` with the highest print level, i.e. level `6`, yields
+
+~~~
+gap> ApplicableMethod(AverageOrder, [G],6); 
+~~~
+{: .source}
+
+~~~
+#I  Searching Method for AverageOrder with 1 arguments:
+#I  Total: 3 entries
+#I  Method 1: ``AverageOrder: system getter'', value: 2*SUM_FLAGS+5
+#I   - 1st argument needs [ "Tester(AverageOrder)" ]
+#I  Method 2: ``AverageOrder: for a group'', value: 35
+#I  Function Body:
+function ( G )
+    local  cc, sum, c;
+    cc := ConjugacyClasses( G );
+    sum := 0;
+    for c  in cc  do
+        sum := sum + Order( Representative( c ) ) * Size( c );
+    od;
+    return sum / Size( G );
+endfunction( G ) ... end
+~~~
+{: .output}
+See the documentation of `ApplicableMethod` [here](https://www.gap-system.org/Manuals/doc/ref/chap7.html#X7FDA1D4B87BD25A8).
+
+
 > ## Which method is being called
->
-> * Try to call `AverageOrder` for a collection which is not a group
->   (a list of group elements and/or a conjugacy class of group elements).
->
-> * Debugging tools like `Trace methods` may help to see which method is
->   being called.
 >
 > * `ApplicableMethod` in combination with `PageSource` may point you to
 >   the source code with all the comments.
 {: .callout}
 
-A _property_ is a boolean-valued attribute. It can be created using `NewProperty`
+So far we have declared `AverageOrder` as an attribute and associated it with every group
+we compute it for. We would also like to create an attribute that tells us directly if 
+a given group has a whole numbered average order of elements.
+
+In GAP a _property_ is a boolean-valued attribute. It can be created using `NewProperty`
+as shown in the following example:
 
 ~~~
 IsIntegerAverageOrder := NewProperty("IsIntegerAverageOrder", IsCollection);
@@ -226,9 +274,9 @@ IsIntegerAverageOrder := NewProperty("IsIntegerAverageOrder", IsCollection);
 {: .source}
 
 Now we will install a method for `IsIntegerAverageOrder` for a collection.
-Observe that neither below nor in the examples above it is not necessary to create
-a function first and then install it as a method. The following method installation
-just creates a new function as one of its arguments:
+Observe that neither below nor in the examples above it is necessary to create
+a function first and then install it as a method. The following command installes a method
+to compute the above defined property: 
 
 ~~~
 InstallMethod( IsIntegerAverageOrder,
@@ -239,20 +287,12 @@ InstallMethod( IsIntegerAverageOrder,
 ~~~
 {: .source}
 
-Note that because `AverageOrder` is an operation it will take care of the selection of
+Note that because `AverageOrder` is an operation it will take care of selecting
 the most suitable method.
 
-> ## Does such method always exist?
->
-> No. "No-method-found" is a special kind of error, and there are tools to
-> investigate such errors: see `?ShowArguments`, `?ShowDetails`, `?ShowMethods`
-> and `?ShowOtherMethods`.
-{: .callout}
-
-The following calculation shows that despite our success with calculating
-the average order for large permutation groups via conjugacy classes of
-elements, for pc groups from the Small Groups Library it could be faster
-to iterate over their elements than to calculate conjugacy classes:
+As a wrap up of this session, let us have a last look at another example, a so 
+called pc group. These are groups admitting a subnormal series with cyclic factors. The
+first 1000 groups of order 1536 are pc groups.
 
 ~~~
 l:=List([1..1000],i->SmallGroup(1536,i));; List(l,AvgOrdOfGroup);;time;
@@ -274,8 +314,10 @@ l:=List([1..1000],i->SmallGroup(1536,i));; List(l,AvgOrdOfCollection);;time;
 ~~~
 {: .output}
 
-> ## Don't panic!
->
+This is surprising: Apparantly iterating over the elements of a pc group is faster
+than computing its conjugacy classes and summing up the orders of elements of the
+group that way.
+
 > * Install a method for `IsPcGroup` that iterates over the group elements
 >   instead of calculations its conjugacy classes.
 >
