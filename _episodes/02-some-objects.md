@@ -39,7 +39,7 @@ Some other immediate objects are floats and finite field elements:
 {: .output}
 
 The elements of a finite field `GF(q)` with `q` elements
-are denoted in terms of `Z(q)` which is a generator its multiplicative group.
+are denoted in terms of `Z(q)` which is a generator of its multiplicative group.
 ~~~
 AsList(GF(2)); Z(5); Z(5)^4;
 ~~~

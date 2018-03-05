@@ -13,6 +13,7 @@ keypoints:
 - "Informative function names and comments will make code more readable to your future self and to others."
 - "Beware of undeclared local variables!"
 - "The break loop can be extremely helpful for debugging."
+- "You can interrupt computations by hitting Ctrl + C."
 ---
 
 Just to remind our task: for a finite group _G_, we would like to calculate
@@ -161,9 +162,9 @@ reusable for the future calculations.
 
 Using a text editor (for example, the one that you have used for the previous
 Software Carpentry lessons), create a text file called `avgord.g` containing
-the code of the function and comments (a good practice to use them!):
-
-TODO: explain comments
+the code as below. Lines that start with `#` are comments and are ignored for the evaluation of your code. 
+_Always_ comment your code so you know what it is you did when you come
+back to it weeks later!
 
 ~~~
 #####################################################################
@@ -345,9 +346,14 @@ return sum/Size(G);
 
 The reason GAP prints these warnings is the following.
 GAP distinguishes between so-called global and local variables.
-TODO: explain this, give an example
+Global variables are known by "the whole session" so they can be accessed
+by every function and also changed by every function. Local variables
+are defined within functions and their values are only known as GAP
+is currently working in this function as we will see below.
+Whenever you need a new variable for a function you should _always_ 
+declare it as local. Otherwise, two things will happen: GAP will trow a warning and,
+more importantly, your code might have hard to decipher side effects you did not plan for.
 
-TODO: explain, that one should **always** declare local variables as local variables
 These warnings mean because `g` and `sum` are not declared as `local`
 variables, GAP will expect them to be global variables at the time when
 the function is called.
@@ -355,7 +361,7 @@ Since they did not exist when `Read` was called, a warning was displayed.
 However, had they existed at that time, there would be no warning, and they may be still overwritten
 during the call to `AvgOrdOfGroup`! This shows how important is to
 declare local variables. Let us investigate what happened in slightly
-more details:
+greater detail:
 
 The function is now re-defined, as we can see from its output (or can
 inspect with `PageSource(AvgOrdOfGroup)` which will also display comments,
@@ -430,10 +436,16 @@ sum; g;
 ~~~
 {: .output}
 
+So the variables `g` and `sum` we defined before running the functions
+have now been changed. This is very often not what you intended to happen
+and it might be hard to detect once your code becomes more complicated.
+
+
 Finally, let us use our example to see the power of the `break` loop. 
 Suppose our only change from the working code was commenting out
-the initialisation of `sum`. Assume that we have just started a new session and used
-`Read` to get our new definition of `AvgOrdOfGroup`.
+the initialisation of `sum`. Now we start a new session and use
+`Read` to get our new definition of `AvgOrdOfGroup`. No other
+new global variables are now known.
 ~~~
 AvgOrdOfGroup := function(G)
 local sum, g;
@@ -475,7 +487,21 @@ Group([ (1,2,3,4,5,6,7,8,9,10,11), (3,7,11,8)(4,10,5,6) ])
 ()
 ~~~
 {: .output}
-We now use `quit;` to leave the break loop.
+We use `quit;` to leave the break loop.
+
+Another instance in which you naturally encounter the `break` loop is
+when your code takes to long for your liking and you interrupt it:
+
+~~~
+Elements(SymmetricGroup(12));;
+~~~
+{: .source}
+
+Once you hit enter on this command GAP starts a lengthy computation and 
+you might want to wait this long. You can interrupt GAP in its computation
+by hitting Ctrl + C. GAP will then enter a break loop in which you can
+access the local variables of the currently executed functions to perhaps
+find out why the computation took so long.
 
 Now, before reading the next part of the lesson, please
 revert the last change by uncommenting the two commented lines, so that
