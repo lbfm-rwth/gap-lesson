@@ -650,6 +650,16 @@ To say it with Donald Knuth:
 >   Choose wisely!
 {: .callout}
 
+> ## The `->` constructor
+>
+> * Does the `->` constructor for functions fit into the functional programming
+>   paradigm?
+>
+> > ## Solution:
+> > Yes. E.g. the function `f := x -> x^3` does not change its input.
+> {: .solution}
+{: .challenge}
+
 Note that for many list operations there are both functions that create a new list and
 functions that change its first input.
 E.g.
@@ -685,16 +695,6 @@ L;
 >
 > * Names of functions without side effects are nouns or adjectives.
 {: .callout}
-
-> ## The `->` constructor
->
-> * Does the `->` constructor for functions fit into the functional programming
->   paradigm?
->
-> > ## Solution:
-> > Yes. E.g. the function `f := x -> x^3` does not change its input.
-> {: .solution}
-{: .challenge}
 
 Let's consider another tool to manipulate lists. Often we need to get all elements
 from a list that satisfy a certain condition. For example we might need a list
