@@ -6,14 +6,13 @@ questions:
 - "How to record information in GAP objects"
 objectives:
 - "Declaring an attribute"
+- "Checking an object for attributes"
 - "Installing a method"
 - "Understanding method selection"
-- "Using debugging tools"
 keypoints:
-- "_Positional_ objects may accumulate information about themselves during their lifetime."
+- "_Positional_ objects may accumulate information about themselves during their lifetime. This is done by using _Attributes_."
 - "This means that next time the stored information may be retrieved at zero costs."
 - "_Methods_ are bunches of functions; the _method selection_ will choose the most efficient method based on the type of all arguments."
-- "'No-method-found' is a special kind of error with useful debugging tools helping to understand it."
 ---
 
 Of course, for any given group the average order of its elements needs to
@@ -46,10 +45,10 @@ AvgOrdOfCollection(A); time; AvgOrdOfCollection(A); time;
 
 As you can see, we only called `AlternatingGroup(10)` once but GAP apparently
 did not store the result in `A` and did all the work again when we called 
-`AvgOrdOfCollection(A)` the second time.
+`AvgOrdOfCollection(A)` for the second time.
 
 If you need to reuse this value, one option is to store it in some
-variable, but then you must be careful about matching such variables
+variable but then you must be careful about matching such variables
 with corresponding groups and the code could become quite convoluted
 and unreadable.
 
@@ -134,7 +133,7 @@ Thus, we now want to focuss on how to create our own attributes and how to use t
 
 Since we already have a function `AvgOrdOfCollection` which
 does the calculation, the simplest example of turning it into
-an attribute could look like this:
+an attribute looks like this:
 
 ~~~
 AverageOrder := NewAttribute("AverageOrder", IsCollection);
@@ -291,7 +290,7 @@ Note that because `AverageOrder` is an operation it will take care of selecting
 the most suitable method.
 
 As a wrap up of this session, let us have a last look at another example, a so 
-called pc group. These are groups admitting a subnormal series with cyclic factors. The
+called _pc group_. These are groups admitting a subnormal series with cyclic factors. The
 first 1000 groups of order 1536 are pc groups.
 
 ~~~
@@ -324,4 +323,7 @@ group that way.
 >   instead of calculations its conjugacy classes.
 >
 > * Can you find an example of a pc group when iterating is slower than calculating conjugacy classes?
+> > ## Solution
+> > TBA
+> {: .solution}
 {: .challenge}
