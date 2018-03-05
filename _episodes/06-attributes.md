@@ -318,9 +318,10 @@ This is surprising: Apparantly iterating over the elements of a pc group is fast
 than computing its conjugacy classes and summing up the orders of elements of the
 group that way.
 
+> ## Exercises
+> 
 > * Install a method for `IsPcGroup` that iterates over the group elements
 >   instead of calculations its conjugacy classes.
 >
-> * Estimate practical boundaries of its feasibility. Can you find an example
->   of a pc group when iterating is slower than calculating conjugacy classes?
+> * Can you find an example of a pc group when iterating is slower than calculating conjugacy classes?
 {: .challenge}
