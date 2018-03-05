@@ -322,8 +322,11 @@ group that way.
 > * Install a method for `IsPcGroup` that iterates over the group elements
 >   instead of calculations its conjugacy classes.
 >
-> * Can you find an example of a pc group when iterating is slower than calculating conjugacy classes?
+> * Can you find an example of a pc group for which iterating is slower than calculating conjugacy classes?
+>
 > > ## Solution
-> > TBA
+> > * TBA1
+> >
+> > * TBA2 
 > {: .solution}
 {: .challenge}
