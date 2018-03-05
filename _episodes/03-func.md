@@ -161,9 +161,9 @@ reusable for the future calculations.
 
 Using a text editor (for example, the one that you have used for the previous
 Software Carpentry lessons), create a text file called `avgord.g` containing
-the code of the function and comments (a good practice to use them!):
-
-TODO: explain comments
+the code as below. Lines that start with `#` are comments and are ignored for the evaluation of your code. 
+_Always_ comment your code so you know what it is you did when you come
+back to it weeks later!
 
 ~~~
 #####################################################################
@@ -345,9 +345,14 @@ return sum/Size(G);
 
 The reason GAP prints these warnings is the following.
 GAP distinguishes between so-called global and local variables.
-TODO: explain this, give an example
+Global variables are known by "the whole session" so they can be accessed
+by every function and also changed by every function. Local variables
+are defined within functions and their values are only known as GAP
+is currently working in this function as we will see below.
+Whenever you need a new variable for a function you should _always_ 
+declare it as local. Otherwise, two things will happen: GAP will trow a warning and,
+more importantly, your code might have hard to decipher side effects you did not plan for.
 
-TODO: explain, that one should **always** declare local variables as local variables
 These warnings mean because `g` and `sum` are not declared as `local`
 variables, GAP will expect them to be global variables at the time when
 the function is called.
