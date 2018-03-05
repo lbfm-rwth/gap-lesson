@@ -23,13 +23,12 @@ can be found [here](http://www.gap-system.org/Datalib/datalib.html).
 One of them is the [Small Groups Library](http://www.gap-system.org/Packages/sgl.html) by
 Hans Ulrich Besche, Bettina Eick and Eamonn O'Brien which we want to use in this chapter. First,
 we have a look at how to work with the Small Groups Library before using it to methodically search for groups with the
-property that the average order of its elements is an integer.
-
+afore mentioned property.
 This library contains all groups of a certain 'small' order, i.e. order less than a certain bound
 and orders whose prime factorisation is small in some sense.
 
 Let us have a look at some key functions. To call a group of order `n` out of the Small Groups Library,
-you also need to know its indentifying number. For example
+you also need to know its identifying number. For example
 
 ~~~
 gap> H := SmallGroup(64,1)
@@ -91,7 +90,7 @@ gap> Size(last);
 ~~~
 {: .output}
 
-`SmallGroupsInformation` gives us basic informations about the small groups of a given size as well as precomputed
+`SmallGroupsInformation` gives us basic information about the small groups of a given size as well as precomputed
 information about these groups.
 The function `AllSmallGroups` returns all small groups with a given size provided as the argument. However, it is possible
 to use a filter to search for small groups of a given size with additional properies such as abelian groups, 
@@ -120,7 +119,7 @@ Group([ (1,2,3,4,5), (1,2) ]);
 ~~~
 {: .output}
 
-Now we are prepared to use the Small Group Library to search for more groups with an integer average order of elements.
+Now we are prepared to use the Small Group Library to search for more groups whose average order of elements is an integer.
 
 We are going to use inline notatation to define a test function for the above property of a given group.
 Defining a function in this way is possible for one-argument functions.
@@ -159,7 +158,7 @@ gap> AllSmallGroups(Size,24,TestOneGroup,true);
 {: .callout}
 
 Let us first design a rudimentary function testing all groups of a given order and returning
-a group with an integer average order of its elements as soon as one is found and `fail`, which is a special boolen variable
+a group whose average order of elements is an integer as soon as one is found and `fail`, which is a special boolen variable
 in GAP, otherwise. 
 
 ~~~
@@ -241,9 +240,9 @@ fail
 ~~~
 {: .output}
 
-We suspect that groups with integer average order of its elements are rather rare. Hence it is practical to 
+We suspect that groups whose average order of elements is an integer are rather rare. Hence it is practical to 
 write a function checking the groups of order 2 up to `n` for the desired property. Additionally
-we want the function to return a group with integer average order of its elements as soon as one is found.
+we want the function to return a group whose average order of elements is an integer as soon as one is found.
 
 ~~~
 TestAllOrders:=function(f,n)
@@ -287,9 +286,9 @@ TestAllOrders(TestOneGroup,128);
 ~~~
 {: .output}
 
-Our function tells us that `SmallGroup(105,1)` has an integer average order of elements.
+Our function tells us that the average order of elements of`SmallGroup(105,1)` is an integer.
 
-Let us have a closer look at the group we just found. For example, its isomorphism typ is of interest. 
+Let us have a closer look at the group we just found. For example, its isomorphism type is of interest. 
 It can be computed using the GAP function `StructureDescription`. Check [here](http://www.gap-system.org/Manuals/doc/ref/chap39.html#X87BF1B887C91CA2E) for further information.
 
 ~~~
