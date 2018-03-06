@@ -87,7 +87,6 @@ true
 In this case `Test` reported no discrepancies and returned `true`, indicating that `AvgOrdOfGroup` has passed the test.
 
 > ## Creating your own test file.
-    
 >  Create your own test file and run a test on `AvgOrdOfGroup` for the following groups: `SymmetricGroup(7)`, `DihedralGroup(14)` and `AlternatingGroup(7)`.
 > > ## Solution
 > > ~~~ 
