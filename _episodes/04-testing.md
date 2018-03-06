@@ -297,9 +297,9 @@ saving the session with `LogTo`.
 
 > ## Creating test-files with the `LogTo`-command
 >
-> * Create your own test file using the `LogTo`-command and test `AvgOrdOfGroup` for the following groups: `SymmetricGroup(9)`, `AlternatingGroup(9)`, `DihedralGroup(18)` and `SL(2,5)`.
+> Create your own test file using the `LogTo`-command and test `AvgOrdOfGroup` for the following groups: `SymmetricGroup(9)`, `AlternatingGroup(9)`, `DihedralGroup(18)` and `SL(2,5)`.
 > > ## Solution
-> > ~~~
+> > 
 > > gap> S := SymmetricGroup(9);; A := AlternatingGroup(9);; D := DihedralGroup(18);; M := SL(2,5);;
 > > gap> AvgOrdOfGroup(S);
 > > 3291487/362880
