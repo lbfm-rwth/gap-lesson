@@ -91,13 +91,13 @@ In this case `Test` reported no discrepancies and returned `true`, indicating th
 > * Create your own test file and run a test on `AvgOrdOfGroup` for the following groups: `SymmetricGroup(7)`, `DihedralGroup(14)` and `AlternatingGroup(7)`.
 > > ## Solution
 > > 
-> > S := SymmetricGroup(7);; D := DihedralGroup(14);; A := AlternatingGroup(7);;               
-> > gap> AvgOrdOfGroup(S);
-> > 31333/5040
-> > gap> AvgOrdOfGroup(D);
-> > 57/14
-> > gap> AvgOrdOfGroup(A);
-> > 12601/2520
+> > * S := SymmetricGroup(7);; D := DihedralGroup(14);; A := AlternatingGroup(7);;               
+> > * gap> AvgOrdOfGroup(S);
+> > * 31333/5040
+> > * gap> AvgOrdOfGroup(D);
+> > * 57/14
+> > * gap> AvgOrdOfGroup(A);
+> > * 12601/2520
 > {: .solution}
 {: .challenge}
 
@@ -297,17 +297,17 @@ saving the session with `LogTo`.
 
 > ## Creating test-files with the `LogTo`-command
 >
-> Create your own test file using the `LogTo`-command and test `AvgOrdOfGroup` for the following groups: `SymmetricGroup(9)`, `AlternatingGroup(9)`, `DihedralGroup(18)` and `SL(2,5)`.
+> * Create your own test file using the `LogTo`-command and test `AvgOrdOfGroup` for the following groups: `SymmetricGroup(9)`, `AlternatingGroup(9)`, `DihedralGroup(18)` and `SL(2,5)`.
 > > ## Solution
-> > gap> S := SymmetricGroup(9);; A := AlternatingGroup(9);; D := DihedralGroup(18);; M := SL(2,5);;
-> > gap> AvgOrdOfGroup(S);
-> > 3291487/362880
-> > gap> AvgOrdOfGroup(A);
-> > 1516831/181440
-> > gap> AvgOrdOfGroup(D);
-> > 79/18
-> > gap> AvgOrdOfGroup(M);
-> > 221/40
+> > * gap> S := SymmetricGroup(9);; A := AlternatingGroup(9);; D := DihedralGroup(18);; M := SL(2,5);;
+> > * gap> AvgOrdOfGroup(S);
+> > * 3291487/362880
+> > * gap> AvgOrdOfGroup(A);
+> > * 1516831/181440
+> > * gap> AvgOrdOfGroup(D);
+> > * 79/18
+> > * gap> AvgOrdOfGroup(M);
+> > * 221/40
 > {: .solution} 
 {: .challenge}
 
