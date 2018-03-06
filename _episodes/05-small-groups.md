@@ -537,23 +537,15 @@ gap> res;
 
 > ## Exercises
 > 
-> * TBA1
+> * Use the Small Group Librabry to find another group whose order is greater than 1536 and the average order of its elements is an integer.
 >
-> * TBA2
+> * How many groups of order not higher than 2000 may you be able to check,
+>   excluding _p_-groups and those of order 1536?
 >
 > > ## Solution
 > > * TBA1
 > >
 > > * TBA2
+> >
 > {: .solution}
-{: .challenge}
-
-> ## Does the Small Groups Library contain another group with this property?
-> 
-> * What can you say about the order of the groups with this property?
->
-> * How many groups of order not higher than 2000 may you be able to check,
->   excluding _p_-groups and those of order 1536?
->
-> * Use the Small Group Librabry to find another group whose order is greater than 1536 and the average order of its elements is an integer.
 {: .challenge}

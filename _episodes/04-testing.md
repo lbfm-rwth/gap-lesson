@@ -11,7 +11,7 @@ objectives:
 - "Learn the 'Make it right, then make it fast' concept"
 keypoints:
 - "It is easy to create a test file by copying and pasting GAP session or use the LogTo-command."
-- "Writing a good and comprehensive test suite requires some efforts."
+- "Writing a good test suite is an art in itself."
 - "Make it right, then make it fast!"
 ---
 
@@ -30,48 +30,7 @@ methodically as we move along. This can be done efficiently by using **regressio
 First we need to create a **test file**. The test file looks
 exactly like a GAP session. Thus, it is easy to create a test file simply by copying and
 pasting the GAP session with all GAP prompts, inputs and outputs into a
-text file. Another way of creating a test file is by using the `LogTo` command to record a GAP session.
-During the test GAP will run all inputs from the test, compare the outputs with those in the test
-file and report any differences. Let us first have a look at the `LogTo()` function before concerning ourselves with testing the code.
-
-If you want to record what you did in a GAP session to have a look at it later, you can enable logging with the `LogTo` function:
-
-~~~
-LogTo("gap-intro.log");
-~~~
-{: .source}
-
-This will create a file file `gap-intro.log` in the current directory which
-will contain all subsequent input and output that appears on your terminal.
-To stop logging, you can call `LogTo` without arguments:
-~~~
-gap> LogTo();
-~~~
-{: .source}
-
-or leave GAP. Note that `LogTo` blanks the file before starting, if it
-already exists!
-
-It can be useful to leave some comments in the log file in case you return to it in the future.
-You can enter the following after the GAP prompt:
-
-~~~
-# GAP Software Carpentry Lesson
-~~~
-{: .source}
-
-then after pressing the Return key, GAP will display a new prompt and the comment
-will be written to the log file.
-
-The log file records all interaction with GAP happening after the call of `LogTo` but nothing that happened
-before the function call.
-
-~~~
-Beispiel machen!
-~~~
-
-Now we know two ways of creating test files: Copying the relevant lines out of your shell into a document or 
-saving the session with `LogTo`. Let us have a closer look at testing files.
+text file.  Let us have a closer look at testing files.
 
 GAP test files are just text files but it is common practice to name them with the extension `.tst`. Now create the file `avgord.tst` (for simplicity in the current directory) with the following content:
 
@@ -79,12 +38,29 @@ GAP test files are just text files but it is common practice to name them with t
 # tests for average order of a group element
 
 # permutation group
-gap> S:=SymmetricGroup(9);
-Sym( [ 1 .. 9 ] )
+gap> n := 9;;
+gap> S := SymmetricGroup(n);;
+gap> A := AlternatingGroup(n);;
+gap> D := DihedralGroup(2*n);;
 gap> AvgOrdOfGroup(S);
 3291487/362880
+gap> AvgOrdOfGroup(A);
+1516831/181440
+gap> AvgOrdOfGroup(D);
+79/18
 ~~~
 {: .source}
+
+> ## Floats vs. Ints in AvgOrdOfGroup
+> * What would the return value of `AvgOrdOfGroup` be if the variable `sum` would be a
+float (e.g. `sum := 0.0`) instead of an integer?
+> * What would this mean for the tests?
+>
+> > ## Solution
+> > * The return value would be a float.
+> > * Floating point errors could force the test to fail even though the code is correct. 
+> {: .solution} 
+{: .challenge}
 
 As you see, the test file may include comments with certain rules specifying
 where they may be placed, because one should be able to distinguish comments
@@ -93,6 +69,7 @@ lines at the beginning of the test file starting with `#` and one empty line
 together with one or more lines starting with `#` are considered to be comments.
 All other lines are considered GAP output from the preceding GAP input. Please be careful:
 By default, the `Test` function considers blank spaces and additional empty lines as a difference in the output. 
+
 
 To run the test one should use the function `Test`, as documented [here](http://www.gap-system.org/Manuals/doc/ref/chap7.html#X87712F9D8732193C).
 For example (assuming that the function `AvgOrdOfGroup` is already loaded):
@@ -109,12 +86,15 @@ true
 
 In this case `Test` reported no discrepancies and returned `true`, indicating that `AvgOrdOfGroup` has passed the test.
 
-We will neither cover the topic of writing a good and comprehensive test suite
-nor discuss options provided by the `Test` function. For instance, it is possible
-to ignore differences in the output formatting as well as displaying the progress of the test.
-See the `Test` documentary to learn more about the features of this function.
+~~~
+Create your own test file and run a test on `AvgOrdOfGroup` for the following groups: `SymmetricGroup(7)`, `DihedralGroup(14)` and `AlternatingGroup(7)`.
+~~~
+{: .challenge}
 
-Instead, we will now add more groups to `avgord.tst` to demonstrate that the
+Writing good test functions is an art in itself. We only cover the
+very basics in this course.
+
+We will now add more groups to `avgord.tst` to demonstrate that the
 code also works with other kinds of groups and to show various ways of
 combining commands in the test file:
 
@@ -122,8 +102,20 @@ combining commands in the test file:
 # tests for average order of a group element
 
 # permutation group
+gap> n := 9;;
+gap> S := SymmetricGroup(n);;
+gap> A := AlternatingGroup(n);;
+gap> D := DihedralGroup(2*n);;
+gap> AvgOrdOfGroup(S);
+3291487/362880
+gap> AvgOrdOfGroup(A);
+1516831/181440
+gap> AvgOrdOfGroup(D);
+79/18
+
+# permutation group
 gap> S:=SymmetricGroup(9);
-Sym( [ 1 .. 9 ] )
+Sym( [ 1 .. 9  ]  )
 gap> AvgOrdOfGroup(S);
 3291487/362880
 
@@ -154,7 +146,7 @@ true
 ~~~
 {: .output}
 
-We have not used the underlying group sructure in our `AvgOrdOfGroup` function yet. It works just as fine 
+We have not used the underlying group structure in our `AvgOrdOfGroup` function yet. It works just as fine 
 on a set of permutations not forming a group as the following example shows:
 
 ~~~
@@ -254,15 +246,62 @@ true
 Thus, the approach "Make it right, then make it fast" helps to detect bugs
 immediately after they have been introduced.
 
-> ## Exercises
-> 
-> * TBA1 
->
-> * TBA2 
->
-> > ## Solution
-> > * TBA1
-> >
-> > * TBA2
-> {: .solution}
+Another way of creating a test file is by using the `LogTo` command to record a GAP session.
+During the test GAP will run all inputs from the test, compare the outputs with those in the test
+file and report any differences. Let us first have a look at the `LogTo()` function before concerning ourselves with testing the code.
+
+If you want to record what you did in a GAP session to have a look at it later, you can enable logging with the `LogTo` function:
+
+~~~
+LogTo("gap-intro.log");
+~~~
+{: .source}
+
+This will create a file `gap-intro.log` in the current directory which
+contains all subsequent input and output appearing in your terminal.
+To stop logging, you can call `LogTo` without arguments:
+~~~
+gap> LogTo();
+~~~
+{: .source}
+
+or leave GAP. Note that `LogTo` blanks the file before starting, if it
+already exists!
+
+It can be useful to leave some comments in the log file in case you return to it in the future.
+You can enter the following after the GAP prompt:
+
+~~~
+# GAP Software Carpentry Lesson
+~~~
+{: .source}
+
+then after pressing the Return key, GAP will display a new prompt and the comment
+will be written to the log file.
+
+The log file records all interaction with GAP happening after the call of `LogTo` but nothing that happened
+before the function call.
+
+Now we know two ways of creating test files: Copying the relevant lines out of your shell into a document or 
+saving the session with `LogTo`.
+
+> ## Creating test-files with the `LogTo`-command
+> Create your own test file using the `LogTo`-command and test `AvgOrdOfGroup` for the following groups: `SymmetricGroup(9)`, `AlternatingGroup(9)`, `DihedralGroup(18)` and `SL(2,5)`.
+> > 
+> > gap> S := SymmetricGroup(9);; A := AlternatingGroup(9);; D := DihedralGroup(18);; M := SL(2,5);;
+> > gap> AvgOrdOfGroup(S);
+> > 3291487/362880
+> > gap> AvgOrdOfGroup(A);
+> > 1516831/181440
+> > gap> AvgOrdOfGroup(D);
+> > 79/18
+> > gap> AvgOrdOfGroup(M);
+> > 221/40
+> {: .solution} 
 {: .challenge}
+
+> ## Continuous integration
+>
+>
+>
+{: .callout}
