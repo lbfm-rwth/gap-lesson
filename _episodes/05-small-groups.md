@@ -123,16 +123,15 @@ Group([ (1,2,3,4,5), (1,2) ]);
 
 > ## Using the Small Group Library
 >
-> Use the Small Group Library to compute the number of PC groups of order smaller of equal to `64`. How many groups
+> Use the Small Group Library to compute the number of PC groups of order smaller or equal to `64`. How many groups
 of order smaller or equal to `64` are not PC groups?
 > > ## Solution
 > > ~~~
 > > gap > Sum( List( [1 .. 64], i-> Size( AllSmallGroups( i, IsPcGroup ) ) ) );
 > > 585 
-> > There is one group of order less or equal to 64 that is not a pc group, i.e. the trivial group.
-> >
 > > ~~~
 > > {: .source}
+> > There is one group of order less or equal to 64 that is not a pc group, i.e. the trivial group.
 > {: .solution} 
 {: .challenge}
 
@@ -512,19 +511,19 @@ The following example demonstrates how the output may be controlled
 by switching the info level for `InfoSmallGroupsSearch`:
 
 ~~~
-gap> TestOneOrderVariadic(IsIntegerAverageOrder,24);
+gap> TestOneOrderVariadic(TestOneGroup,24);
 fail
 gap> SetInfoLevel( InfoSmallGroupsSearch, 1 );
-gap> TestOneOrderVariadic(IsIntegerAverageOrder,24);
+gap> TestOneOrderVariadic(TestOneGroup,24);
 #I  Checking groups 1 ... 15 of order 24
 #I  Search completed - no counterexample discovered
 fail
-gap> TestOneOrderVariadic(IsIntegerAverageOrder,357);
+gap> TestOneOrderVariadic(TestOneGroup,357);
 #I  Checking groups 1 ... 2 of order 357
 #I  Discovered counterexample: SmallGroup( 357, 1 )
 [ 357, 1 ]
 gap> SetInfoLevel( InfoSmallGroupsSearch, 0);
-gap> TestOneOrderVariadic(IsIntegerAverageOrder,357);
+    gap> TestOneOrderVariadic(TestOneGroup,357);
 [ 357, 1 ]
 ~~~
 {: .output}
@@ -539,7 +538,7 @@ gap> SetInfoLevel( InfoSmallGroupsSearch, 0);
 gap> res:=[];;
 gap> for n in [1..360] do
 >      if not IsPrimePowerInt(n) then
->        t := TestOneOrderVariadic( IsIntegerAverageOrder,n,1,NrSmallGroups(n) );
+>        t := TestOneOrderVariadic( TestOneGroup,n,1,NrSmallGroups(n) );
 >        if t <> fail then
 >          Add(res,t);
 >        fi;
@@ -552,7 +551,7 @@ gap> res;
 
 > ## Exercises
 > 
-> * Use the Small Group Librabry to find another group whose order is greater than 1536 and the average order of its elements is an integer.
+> * Use the Small Group Library to find another group whose order is greater than 1536 and the average order of its elements is an integer.
 >
 > * How many groups of order not higher than 2000 may you be able to check,
 >   excluding _p_-groups and those of order 1536?
