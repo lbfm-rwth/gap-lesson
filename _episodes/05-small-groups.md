@@ -29,7 +29,7 @@ afore mentioned property.
 This library contains all groups of a certain 'small' order, i.e. order less than a certain bound
 and orders whose prime factorisation is small in some sense.
 
-Let us have a look at some key functions. To call a group of order `n` out of the Small Groups Library,
+Let us have a look at some key functions. To call a group of order `n` out of the Small Groups Library 
 you also need to know its identifying number. For example
 
 ~~~
@@ -120,6 +120,21 @@ gap> SmallGroup(120,34);
 Group([ (1,2,3,4,5), (1,2) ]);
 ~~~
 {: .output}
+
+> ## Using the Small Group Library
+>
+> Use the Small Group Library to compute the number of PC groups of order smaller of equal to `64`. How many groups
+of order smaller or equal to `64` are not PC groups?
+> > ## Solution
+> > ~~~
+> > gap > Sum( List( [1 .. 64], i-> Size( AllSmallGroups( i, IsPcGroup ) ) ) );
+> > 585 
+> > There is one group of order less or equal to 64 that is not a pc group, i.e. the trivial group.
+> >
+> > ~~~
+> > {: .source}
+> {: .solution} 
+{: .challenge}
 
 Now we are prepared to use the Small Group Library to search for more groups whose average order of elements is an integer.
 
