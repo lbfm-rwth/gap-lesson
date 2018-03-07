@@ -327,6 +327,6 @@ group that way.
 > > ## Solution
 > > * InstallMethod( AverageOrder, "for a group", [IsGroup], AvgOrdOfGroup );
 > >
-> > * TBA2 
+> > `DihedralGroup(120)` 
 > {: .solution}
 {: .challenge}
