@@ -188,15 +188,15 @@ As groups are collections as well, GAP applies the method `AvgOrder` to groups, 
 > Install `AvgOrdOfGroup` as a method for groups as well.
 >
 > > ## Solution
-> > InstallMethod( AverageOrder, "for a group", [IsGroup], AvgOrdOfGroup);
+> > `InstallMethod( AverageOrder, "for a group", [IsGroup], AvgOrdOfGroup);`
 > {: .solution}
 {: .challenge}
 
 
 > ## Try it
-> Call `AverageOrder` and time this call twice for the same group.
+> Call `AverageOrder` and time this call twice for a group of your choice.
 > > ## Solution
-> > S:=SymmetricGroup(10);; AverageOrder(S); time; AverageOrder(S); time;
+> > `S:=SymmetricGroup(10);; AverageOrder(S); time; AverageOrder(S); time;`
 > {: .solution}
 {: .challenge}
 
