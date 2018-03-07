@@ -184,26 +184,21 @@ So far we have only implemented our `AvgOrdOfCollection` function and not its im
 As groups are collections as well, GAP applies the method `AvgOrder` to groups, using
 `AvgOrdOfCollection`, as seen above.
 
-We would like to install `AvgOrdOfGroup` as a method for groups as well:
+> ## A Method for groups
+> Install `AvgOrdOfGroup` as a method for groups as well.
+>
+> > ## Solution
+> > InstallMethod( AverageOrder, "for a group", [IsGroup], AvgOrdOfGroup);
+> {: .solution}
+{: .challenge}
 
-~~~
-InstallMethod( AverageOrder, "for a group", [IsGroup], AvgOrdOfGroup);
-~~~
-{: .source}
 
-For a newly created group, GAP will use `AvgOrdOfGroup` when `AverageOrder` is called:
-~~~
-S:=SymmetricGroup(10);; AverageOrder(S); time; AverageOrder(S); time;
-~~~
-{: .source}
-
-~~~
-39020911/3628800
-26
-39020911/3628800
-0
-~~~
-{: .output}
+> ## Try it
+> Call `AverageOrder` and time this call twice for the same group.
+> > ## Solution
+> > S:=SymmetricGroup(10);; AverageOrder(S); time; AverageOrder(S); time;
+> {: .solution}
+{: .challenge}
 
 As there usually are several methods applicable to the same object to compute
 the same information, for instance `AvgOrdOfCollection` is applicable to groups
