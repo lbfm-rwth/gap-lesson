@@ -325,8 +325,8 @@ group that way.
 > * Can you find an example of a pc group for which iterating is slower than calculating conjugacy classes?
 >
 > > ## Solution
-> > * InstallMethod( AverageOrder, "for a group", [IsGroup], AvgOrdOfGroup );
+> > * `InstallMethod( AverageOrder, "for a group", [IsGroup], AvgOrdOfGroup );`
 > >
-> > `DihedralGroup(120)` 
+> > * `DihedralGroup(120)` 
 > {: .solution}
 {: .challenge}
