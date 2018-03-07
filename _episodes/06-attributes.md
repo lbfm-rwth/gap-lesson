@@ -206,7 +206,7 @@ S:=SymmetricGroup(10);; AverageOrder(S); time; AverageOrder(S); time;
 {: .output}
 
 As there usually are several methods applicable to the same object to compute
-the same information, for instance `AvgOrdOfCollection` is applicable two groups
+the same information, for instance `AvgOrdOfCollection` is applicable to groups
 and collections in general, one could ask GAP for the most suitable method to performe
 the desired task. GAP provides the function `ApplicableMethod` to answer that question. 
 Here is a first example:
@@ -320,12 +320,12 @@ group that way.
 > ## Exercises
 > 
 > * Install a method for `IsPcGroup` that iterates over the group elements
->   instead of calculations its conjugacy classes.
+>   instead of calculating its conjugacy classes.
 >
 > * Can you find an example of a pc group for which iterating is slower than calculating conjugacy classes?
 >
 > > ## Solution
-> > * TBA1
+> > * InstallMethod( AverageOrder, "for a group", [IsGroup], AvgOrdOfGroup );
 > >
 > > * TBA2 
 > {: .solution}

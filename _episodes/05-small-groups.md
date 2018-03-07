@@ -557,9 +557,9 @@ gap> res;
 >   excluding _p_-groups and those of order 1536?
 >
 > > ## Solution
-> > * `SmallGroup(1785,1)` has an whole numbered average order of elements.
+> > * `SmallGroup(1785,1)` has a whole numbered average order of elements.
 > >
-> > * 1600, 1664, 1728, 1792, 1920, (1944) are a problem
+> > * Groups of order 1600, 1664, 1728, 1792, 1920, (1944) are a problem
 > >
 > {: .solution}
 {: .challenge}

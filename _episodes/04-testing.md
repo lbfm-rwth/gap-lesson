@@ -51,17 +51,6 @@ gap> AvgOrdOfGroup(D);
 ~~~
 {: .source}
 
-> ## Floats vs. Ints in AvgOrdOfGroup
-> * What would the return value of `AvgOrdOfGroup` be if the variable `sum` would be a
-float (e.g. `sum := 0.0`) instead of an integer?
-> * What would this mean for the tests?
->
-> > ## Solution
-> > * The return value would be a float.
-> > * Floating point errors could force the test to fail even though the code is correct. 
-> {: .solution} 
-{: .challenge}
-
 As you see, the test file may include comments with certain rules specifying
 where they may be placed, because one should be able to distinguish comments
 in the test file from GAP output started with `#`. For that purpose
@@ -85,6 +74,17 @@ true
 {: .output}
 
 In this case `Test` reported no discrepancies and returned `true`, indicating that `AvgOrdOfGroup` has passed the test.
+
+> ## Floats vs. Ints in AvgOrdOfGroup
+> * What would the return value of `AvgOrdOfGroup` be if the variable `sum` would be a
+float (e.g. `sum := 0.0`) instead of an integer?
+> * What would this mean for the tests?
+>
+> > ## Solution
+> > * The return value would be a float.
+> > * Floating point errors could force the test to fail even though the code is correct. 
+> {: .solution} 
+{: .challenge}
 
 > ## Creating your own test file.
 >  Create your own test file and run a test on `AvgOrdOfGroup` for the following groups: `SymmetricGroup(7)`, `DihedralGroup(14)` and `AlternatingGroup(7)`.
